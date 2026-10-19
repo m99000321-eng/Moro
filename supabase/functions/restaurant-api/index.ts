@@ -164,7 +164,10 @@ Deno.serve(async (req: Request) => {
     create_order: { limit: 6, window: 600 },
     create_reservation: { limit: 5, window: 1800 },
     track_order: { limit: 20, window: 600 },
-    subscribe_newsletter: { limit: 4, window: 3600 }
+    subscribe_newsletter: { limit: 4, window: 3600 },
+    staff_list_customers: { limit: 60, window: 600 },
+    staff_update_customer: { limit: 30, window: 600 },
+    staff_delete_customer: { limit: 5, window: 600 }
   };
   if (!config[action]) return respond(400, { ok: false, error: "UNKNOWN_ACTION" }, origin);
 
@@ -172,6 +175,8 @@ Deno.serve(async (req: Request) => {
     if (!await rateAllowed(req, action, config[action].limit, config[action].window)) {
       return respond(429, { ok: false, error: "TOO_MANY_REQUESTS" }, origin);
     }
+
+    if (action.startsWith("staff_")) return await staffAdminAction(action, body, req, origin);
 
     if (action === "create_order") {
       const customerAccess = await requireCustomer(req);
