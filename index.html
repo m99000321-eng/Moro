@@ -758,9 +758,15 @@ if('IntersectionObserver'in window){
  if(story)new IntersectionObserver(es=>{worldVisible=es.some(e=>e.isIntersecting)},{rootMargin:'120px'}).observe(story);
 }
 if('ResizeObserver'in window){const ro=new ResizeObserver(()=>{heroScene&&heroScene.resize();worldScene&&worldScene.resize()});['heroFoodCanvas','worldFoodCanvas'].forEach(id=>{const el=document.getElementById(id);if(el&&el.parentElement)ro.observe(el.parentElement)})}
-function frame(t){if(heroVisible&&heroScene)heroScene.draw(t,px,py,1);if(worldVisible&&worldScene)worldScene.draw(t,px*.3,py*.3,progress);if(!reduce)requestAnimationFrame(frame)}
+// Keep the renderer alive for pointer and scroll interaction even with reduced motion enabled.
+function frame(t){
+ const sceneTime=reduce?0:t;
+ if(heroVisible&&heroScene)heroScene.draw(sceneTime,px,py,1);
+ if(worldVisible&&worldScene)worldScene.draw(sceneTime,px*.3,py*.3,progress);
+ requestAnimationFrame(frame);
+}
 updateStory();
-if(!reduce)requestAnimationFrame(frame);else{heroScene&&heroScene.draw(0,0,0,1);worldScene&&worldScene.draw(0,0,0,progress)}
+requestAnimationFrame(frame);
 })();
 </script>
 <script type="module" id="saffron-backend-client">
