@@ -172,7 +172,7 @@ $("#loginForm").addEventListener("submit",async e=>{
   if(error)throw error;
   currentUser=data.user;staff=await guardStaff(currentUser);showApp();await loadAll();
   if(refreshTimer)clearInterval(refreshTimer);refreshTimer=setInterval(()=>loadAll(),30000);
- }catch(error){$("#loginMessage").textContent=error.message||"Sign-in failed.";}
+ }catch(error){const text=error.message||"Sign-in failed.";if(currentUser&&!staff&&/not enabled as restaurant staff/i.test(text)){await db.auth.signOut();currentUser=null;staff=null;location.replace("/customer.html?reason=admin-denied");return;}$("#loginMessage").textContent=text;}
  finally{btn.disabled=false;}
 });
 $("#logoutBtn").addEventListener("click",async()=>{if(refreshTimer)clearInterval(refreshTimer);refreshTimer=null;await db.auth.signOut();currentUser=null;staff=null;showLogin("Signed out.");});
@@ -181,7 +181,7 @@ const {data:sessionData}=await db.auth.getSession();
 if(sessionData.session){
  currentUser=sessionData.session.user;
  try{staff=await guardStaff(currentUser);showApp();await loadAll();refreshTimer=setInterval(()=>loadAll(),30000);}
- catch(e){await db.auth.signOut();currentUser=null;staff=null;showLogin(e.message);}
+ catch(e){await db.auth.signOut();currentUser=null;staff=null;location.replace("/customer.html?reason=admin-denied");}
 }
 </script>
 </body></html>
