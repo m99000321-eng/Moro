@@ -3,70 +3,129 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#10110d">
+  <meta name="theme-color" content="#080a08">
   <title>SAFFRON TABLE | بوابة الدخول</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{color-scheme:dark;--bg:#10110d;--panel:#191a14;--line:#34362a;--text:#f4f1e7;--muted:#b7b7a8;--accent:#d8f36a}
-    *{box-sizing:border-box}
-    body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0%,#343923 0%,transparent 50%),var(--bg);color:var(--text);font-family:Arial,"Segoe UI",sans-serif;display:grid;place-items:center;padding:28px}
-    main{width:min(100%,1000px);margin:auto}
-    .eyebrow{color:var(--accent);letter-spacing:.18em;font-size:.78rem;font-weight:700;text-align:center}
-    h1{font-size:clamp(2.3rem,6vw,4.8rem);line-height:1.05;text-align:center;margin:16px 0 12px;letter-spacing:-.04em}
-    .intro{color:var(--muted);text-align:center;font-size:1.05rem;line-height:1.9;max-width:620px;margin:0 auto 38px}
-
-    .scene3d{height:150px;width:190px;margin:0 auto 8px;position:relative;display:grid;place-items:center;perspective:800px;isolation:isolate}.core{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;position:relative;z-index:2;color:#17190e;font:700 34px Georgia,serif;background:radial-gradient(circle at 30% 23%,#fffbd7 0,#eaff94 17%,#d8f36a 48%,#71872c 100%);box-shadow:0 0 36px #d8f36a55,inset -9px -10px 18px #34411377;transform:translateZ(30px);animation:portalFloat 4s ease-in-out infinite}.orbit{position:absolute;width:156px;height:72px;border:1px solid #d8f36aaa;border-radius:50%;transform-style:preserve-3d;box-shadow:0 0 16px #d8f36a18}.orbit-a{transform:rotateX(66deg) rotateZ(-22deg);animation:portalSpin 9s linear infinite}.orbit-b{width:126px;height:102px;border-color:#a4b97d;transform:rotateY(68deg) rotateX(18deg);animation:portalSpin 12s linear infinite reverse}.spark{position:absolute;width:8px;height:8px;border-radius:50%;background:#d8f36a;box-shadow:0 0 18px #d8f36a;top:18px;right:26px;animation:portalSpark 3.2s ease-in-out infinite}.spark-b{width:6px;height:6px;top:auto;right:auto;bottom:20px;left:25px;background:#e7a87c;box-shadow:0 0 14px #e7a87c;animation-delay:-1.4s}@keyframes portalFloat{0%,100%{transform:translateY(0) translateZ(30px)}50%{transform:translateY(-8px) translateZ(40px)}}@keyframes portalSpin{from{rotate:0deg}to{rotate:360deg}}@keyframes portalSpark{0%,100%{translate:0 0;opacity:.65}50%{translate:9px -10px;opacity:1}}@media(prefers-reduced-motion:reduce){.scene3d *, .scene3d{animation:none!important;transition:none!important}}
-
-    .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-    .card{background:linear-gradient(155deg,#202219,#151610);border:1px solid var(--line);border-radius:22px;padding:26px;display:flex;flex-direction:column;min-height:245px;transition:transform .2s,border-color .2s}
-    .card:hover{transform:translateY(-4px);border-color:var(--accent)}
-    .num{color:var(--accent);font-size:.82rem;letter-spacing:.14em}
-    h2{font-size:1.45rem;margin:24px 0 10px}
-    p{color:var(--muted);line-height:1.8;margin:0 0 24px;flex:1}
-    a{display:flex;justify-content:center;align-items:center;text-decoration:none;background:var(--accent);color:#17190e;font-weight:800;padding:14px 16px;border-radius:12px;min-height:48px}
-    a:focus-visible{outline:3px solid white;outline-offset:4px}
-    .admin a{background:transparent;border:1px solid #73765d;color:var(--text)}
-    footer{text-align:center;color:#858777;font-size:.82rem;margin-top:28px}
-    @media(max-width:760px){.cards{grid-template-columns:1fr}.card{min-height:unset}.intro{margin-bottom:26px}h2{margin-top:16px}body{padding:24px 16px}}
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap');
-
-:root{--bg:#0b0a08;--line:#57472d;--text:#f4eee1;--muted:#b0a795;--accent:#d7b66f}
-body{background:radial-gradient(ellipse at 50% 0%,#b38a3b18,transparent 45%),radial-gradient(ellipse at 10% 75%,#8b632018,transparent 30%),linear-gradient(135deg,#080807,#100e0b 55%,#080807);font-family:"DM Sans",Arial,sans-serif;padding:30px 24px}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.1;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");z-index:-1}
-main{width:min(1160px,100%);position:relative}.eyebrow{color:#d7b66f;font-size:9px;letter-spacing:.32em}.scene3d{height:180px;width:220px;margin:0 auto 4px;position:relative;display:grid;place-items:center;perspective:1100px;isolation:isolate;filter:drop-shadow(0 24px 28px #0009)}.scene3d:before{content:"";position:absolute;width:176px;height:28px;bottom:12px;border-radius:50%;background:#c59b4b24;filter:blur(14px);transform:rotateX(70deg)}.core{width:102px;height:124px;border-radius:48% 48% 44% 44%;display:grid;place-items:center;position:relative;z-index:2;color:#f0d8a0;font:500 43px "Playfair Display",Georgia,serif;letter-spacing:-.08em;background:linear-gradient(115deg,#181713 0%,#353024 18%,#11110e 36%,#4b3a20 48%,#17150f 63%,#2a2519 83%,#0d0d0b 100%);border:1px solid #b89a5c;box-shadow:inset 1px 1px 1px #fff5c555,inset -9px -9px 18px #000c,0 0 0 5px #c3a3650b,0 0 35px #c9a55a16;transform:rotateY(-15deg) rotateX(6deg) translateZ(24px);animation:medallionFloat 7s ease-in-out infinite}.core:before{content:"";position:absolute;inset:7px;border:1px solid #d9bc7a7a;border-radius:inherit;pointer-events:none}.core:after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(112deg,transparent 15%,#fff6d40b 34%,#e2c47a38 49%,transparent 63%);transform:translateX(-18%);animation:goldSweep 8s ease-in-out infinite}.orbit{position:absolute;width:166px;height:112px;border:1px solid #c8a35c60;border-radius:50%;transform-style:preserve-3d;box-shadow:0 0 18px #b9954b0d}.orbit-a{transform:rotateX(72deg) rotateZ(-24deg);animation:frameDrift 11s ease-in-out infinite}.orbit-b{width:132px;height:145px;border-color:#e3c98a33;transform:rotateY(68deg) rotateX(12deg);animation:frameDrift 13s ease-in-out infinite reverse}.spark{position:absolute;width:3px;height:3px;border-radius:50%;background:#f0d18b;box-shadow:0 0 9px #e7c77e;top:30px;right:42px;animation:goldSpark 5s ease-in-out infinite}.spark-b{width:2px;height:2px;top:auto;right:auto;bottom:32px;left:42px;background:#fff0c9;box-shadow:0 0 8px #f1d69c;animation-delay:-2.4s}@keyframes medallionFloat{0%,100%{transform:rotateY(-15deg) rotateX(6deg) translateY(0) translateZ(24px)}50%{transform:rotateY(-8deg) rotateX(2deg) translateY(-5px) translateZ(34px)}}@keyframes goldSweep{0%,25%{opacity:.2;transform:translateX(-28%)}55%,100%{opacity:.75;transform:translateX(22%)}}@keyframes frameDrift{0%,100%{rotate:-3deg;scale:1}50%{rotate:3deg;scale:1.025}}@keyframes goldSpark{0%,100%{translate:0 0;opacity:.25}50%{translate:5px -7px;opacity:.95}}@media(prefers-reduced-motion:reduce){.scene3d *, .scene3d{animation:none!important;transition:none!important}}
-.cards{gap:18px}.card{background:linear-gradient(155deg,#19160fef,#100e0bf7);border:1px solid #b99a5b43;border-radius:2px;padding:clamp(25px,3vw,36px);min-height:270px;box-shadow:0 24px 70px #0005;position:relative;overflow:hidden;backdrop-filter:blur(14px)}.card:before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,#d8b975,#f4e0ad,#99733a,transparent);opacity:.8}.card:hover{transform:translateY(-5px);border-color:#d7b66f;box-shadow:0 30px 80px #0008,0 0 35px #d7b66f0b}.num{color:#c9a866;font-size:9px;letter-spacing:.2em}.card h2{font:500 25px "Playfair Display",Georgia,serif;margin:28px 0 12px;color:#f2e7d1}.card p{font-size:13px;color:#b4aa96;line-height:1.9}.card a{background:linear-gradient(110deg,#d6b66e,#f0d99c 48%,#b48d47);color:#171109;border-radius:0;font-size:11px;letter-spacing:.04em}.card.admin a{background:transparent;border:1px solid #9e814d;color:#e8d3a2}.intro{font-size:14px;color:#b4aa96;max-width:650px;margin-bottom:42px}h1{font:500 clamp(42px,6vw,76px)/1.04 "Playfair Display",Georgia,serif;letter-spacing:-.055em;margin:8px 0 14px}h1 span{color:#d7b66f!important}footer{color:#8c806b;font-size:10px;letter-spacing:.04em;margin-top:30px}
-@media(max-width:760px){body{padding:20px 14px}.scene3d{height:150px;transform:scale(.9)}.cards{grid-template-columns:1fr;gap:12px}.card{min-height:unset;padding:24px}.card h2{margin:16px 0 8px}.intro{margin-bottom:26px}}
+:root{color-scheme:dark;--bg:#080a08;--panel:#11150f;--text:#f5f2e8;--muted:#a6ad9a;--line:#333b2b;--acid:#d5ff65;--ember:#ff8755;--gold:#d8c28a}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;overflow-x:hidden;background:#080a08;color:var(--text);font-family:"DM Sans",Arial,sans-serif;padding:clamp(18px,4vw,48px);display:grid;place-items:center;isolation:isolate}
+body:before,body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2}
+body:before{background:radial-gradient(ellipse at 15% 20%,#d5ff650d,transparent 35%),radial-gradient(ellipse at 88% 75%,#ff875511,transparent 33%),linear-gradient(135deg,#080a08,#0d100b 55%,#080908)}
+body:after{z-index:-1;opacity:.09;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E")}
+#role-gateway{width:min(1160px,100%);margin:auto;position:relative}
+.gate-top{display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #ffffff17;padding-bottom:20px}
+.brand-lockup{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
+.brand-monogram{width:42px;height:42px;display:grid;place-items:center;border:1px solid #d5ff6570;color:var(--acid);font:600 17px "Playfair Display",Georgia,serif;transform:rotate(-5deg);box-shadow:0 0 24px #d5ff650b}
+.brand-word{font:600 15px "Playfair Display",Georgia,serif;letter-spacing:.13em}
+.brand-word small{display:block;font:600 8px "DM Sans",Arial,sans-serif;letter-spacing:.27em;color:#a9b98a;margin-top:4px}
+.top-meta{color:#858e79;font-size:9px;letter-spacing:.2em;text-transform:uppercase}
+.gateway-hero{text-align:center;padding:clamp(24px,4vw,48px) 0 32px}
+.eyebrow{color:var(--acid);font-size:10px;font-weight:700;letter-spacing:.3em;text-transform:uppercase}
+.gateway-hero h1{font:500 clamp(38px,6.5vw,76px)/.99 "Playfair Display",Georgia,serif;letter-spacing:-.055em;margin:17px 0 15px;text-wrap:balance}
+.gateway-hero h1 span{color:var(--acid);font-style:italic}
+.gateway-hero p{max-width:600px;margin:0 auto;color:#a9b09f;font-size:13px;line-height:1.9}
+.stage{height:154px;width:220px;position:relative;margin:0 auto 2px;perspective:1000px;display:grid;place-items:center;isolation:isolate}
+.stage:before{content:"";position:absolute;bottom:8px;width:120px;height:20px;border-radius:50%;background:#d5ff6525;filter:blur(15px);transform:rotateX(70deg)}
+.stage-core{position:relative;z-index:3;width:77px;height:91px;border-radius:48% 48% 44% 44%;display:grid;place-items:center;background:linear-gradient(115deg,#151910,#3d4729 24%,#11150f 44%,#6a5b36 51%,#171b12 69%,#090b09);border:1px solid #d8c28a8c;color:#e6d5a0;font:500 34px "Playfair Display",Georgia,serif;box-shadow:inset 0 0 0 5px #ffffff05,inset -8px -10px 18px #000d,0 0 35px #d5ff6510;transform:rotateY(-15deg) rotateX(8deg) translateZ(20px);animation:coreFloat 6.5s ease-in-out infinite}
+.stage-core:before{content:"";position:absolute;inset:6px;border:1px solid #d8c28a55;border-radius:inherit}
+.stage-core:after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(110deg,transparent 18%,#fff7d10a 38%,#d5ff6540 50%,transparent 66%);animation:coreShine 7s ease-in-out infinite}
+.ring{position:absolute;width:176px;height:100px;border:1px solid #d5ff654d;border-radius:50%;transform-style:preserve-3d;box-shadow:0 0 20px #d5ff6508}
+.ring-one{transform:rotateX(70deg) rotateZ(-22deg);animation:ringDrift 12s ease-in-out infinite}
+.ring-two{width:132px;height:143px;border-color:#ff875540;transform:rotateY(68deg) rotateX(10deg);animation:ringDrift 15s ease-in-out infinite reverse}
+.ring-three{width:190px;height:130px;border-color:#d8c28a24;transform:rotateX(68deg) rotateZ(65deg);animation:ringDrift 17s ease-in-out infinite}
+.spark{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--acid);box-shadow:0 0 12px var(--acid);right:30px;top:24px;animation:sparkMove 4.5s ease-in-out infinite}
+.spark.two{right:auto;left:28px;top:auto;bottom:26px;background:var(--ember);box-shadow:0 0 12px var(--ember);animation-delay:-2s}
+@keyframes coreFloat{0%,100%{transform:rotateY(-15deg) rotateX(8deg) translateY(0) translateZ(20px)}50%{transform:rotateY(-7deg) rotateX(3deg) translateY(-6px) translateZ(30px)}}
+@keyframes coreShine{0%,25%{opacity:.15;transform:translateX(-22%)}60%,100%{opacity:.85;transform:translateX(22%)}}
+@keyframes ringDrift{0%,100%{rotate:-3deg;scale:1}50%{rotate:3deg;scale:1.035}}
+@keyframes sparkMove{0%,100%{translate:0 0;opacity:.3}50%{translate:6px -9px;opacity:1}}
+.gates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;perspective:1400px}
+.gate{--glow:213,255,101;position:relative;min-height:310px;overflow:hidden;display:flex;flex-direction:column;padding:clamp(24px,3.4vw,42px);text-decoration:none;color:var(--text);background:radial-gradient(ellipse at var(--px,50%) var(--py,0%),rgba(var(--glow),.12),transparent 45%),linear-gradient(145deg,#171c13ee,#0d100cf7 70%);border:1px solid #d5ff6535;box-shadow:0 25px 80px #0005;transform:translateY(0) rotateX(0) rotateY(0);transform-style:preserve-3d;transition:transform .25s ease,border-color .35s,box-shadow .35s}
+.gate:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 18%,#ffffff05 38%,transparent 56%);transform:translateX(-105%);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gate:after{content:"";position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--acid),transparent);opacity:.75}
+.gate:hover{border-color:rgba(var(--glow),.65);box-shadow:0 32px 90px #0009,0 0 55px rgba(var(--glow),.07)}
+.gate:hover:before{transform:translateX(105%)}
+.gate.admin{--glow:255,135,85;border-color:#ff87553a;background:radial-gradient(ellipse at var(--px,50%) var(--py,0%),rgba(255,135,85,.12),transparent 45%),linear-gradient(145deg,#1d1713f2,#0d0e0bf7 72%)}
+.gate.admin:after{background:linear-gradient(90deg,transparent,var(--ember),transparent)}
+.gate-topline{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#a7af99;font-size:9px;letter-spacing:.22em}
+.gate-index{color:var(--acid);font-variant-numeric:tabular-nums}
+.admin .gate-index{color:var(--ember)}
+.gate-icon{width:64px;height:64px;margin:32px 0 24px;display:grid;place-items:center;border:1px solid #d5ff6550;background:#d5ff6508;color:var(--acid);transform:translateZ(22px);box-shadow:inset 0 0 22px #d5ff6508,0 10px 28px #0004}
+.admin .gate-icon{color:var(--ember);border-color:#ff87555a;background:#ff875508;box-shadow:inset 0 0 22px #ff875508,0 10px 28px #0004}
+.gate-icon svg{width:27px;height:27px}
+.gate h2{font:500 clamp(25px,3vw,35px)/1.1 "Playfair Display",Georgia,serif;letter-spacing:-.03em;margin:0 0 12px}
+.gate p{font-size:12px;line-height:1.9;color:#aeb4a4;max-width:410px;margin:0 0 27px}
+.gate-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:18px;border-top:1px solid #ffffff17}
+.gate-bottom strong{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--acid)}
+.admin .gate-bottom strong{color:#ffad89}
+.gate-arrow{width:35px;height:35px;display:grid;place-items:center;border:1px solid #d5ff6545;color:var(--acid);font-size:17px;transition:transform .25s,background .25s}
+.admin .gate-arrow{border-color:#ff87555a;color:var(--ember)}
+.gate:hover .gate-arrow{transform:translateX(-4px);background:#d5ff6510}
+.admin:hover .gate-arrow{background:#ff875510}
+.security-line{display:flex;align-items:center;justify-content:center;gap:9px;text-align:center;color:#858e79;font-size:10px;line-height:1.8;margin:23px 0 0}
+.security-line svg{flex-shrink:0;color:#d5ff65}
+.site-return{display:flex;justify-content:center;margin-top:20px}
+.site-return a{display:inline-flex;align-items:center;gap:9px;color:#aeb5a2;text-decoration:none;font-size:11px;border-bottom:1px solid #ffffff28;padding:8px 2px;transition:color .2s,border-color .2s}
+.site-return a:hover{color:var(--acid);border-color:var(--acid)}
+.gate:focus-visible,.site-return a:focus-visible{outline:2px solid white;outline-offset:5px}
+@media(max-width:760px){body{padding:18px 14px}.gate-top{padding-bottom:14px}.top-meta{font-size:8px;letter-spacing:.12em}.gateway-hero{padding:25px 0 18px}.gateway-hero h1{font-size:clamp(39px,10vw,58px)}.gateway-hero p{font-size:12px}.stage{height:135px;transform:scale(.9)}.gates{grid-template-columns:1fr;gap:12px}.gate{min-height:unset;padding:24px}.gate-icon{width:51px;height:51px;margin:23px 0 17px}.gate p{margin-bottom:20px}.gate-bottom{padding-top:14px}}
+@media(max-width:390px){.top-meta{max-width:100px;text-align:left;line-height:1.7}.gateway-hero h1{font-size:38px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.gate{transform:none!important}}
 </style>
 </head>
 <body>
-  <main>
-    <div class="scene3d" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="core">S.</div><i class="spark"></i><i class="spark spark-b"></i></div>
-    <div class="eyebrow">SAFFRON TABLE · OFFICIAL PORTAL</div>
-    <h1>كل حاجة في <span style="color:var(--accent)">مكان واحد.</span></h1>
-    <p class="intro">اختار المكان اللي عايز تروحه. لينك واحد للوصول للموقع وحساب الزبون ولوحة الأدمن، مع بقاء كل صلاحية محمية لوحدها.</p>
-    <section class="cards" aria-label="اختيارات الدخول">
-      <article class="card">
-        <div class="num">01 / WEBSITE</div>
-        <h2>الموقع الرئيسي</h2>
-        <p>استكشف المنيو، وشوف تجربة المطعم، وابدأ طلبك.</p>
-        <a href="/">افتح الموقع</a>
-      </article>
-      <article class="card">
-        <div class="num">02 / CUSTOMER</div>
-        <h2>حساب الزبون</h2>
-        <p>سجّل حساب جديد أو ادخل لمتابعة طلباتك وحجوزاتك.</p>
-        <a href="/customer.html">دخول الزبائن</a>
-      </article>
-      <article class="card admin">
-        <div class="num">03 / ADMIN</div>
-        <h2>لوحة الأدمن</h2>
-        <p>إدارة الطلبات والحجوزات وحسابات الزبائن. الدخول للأدمن المصرّح له فقط.</p>
-        <a href="/admin.html">دخول الأدمن</a>
-      </article>
-    </section>
-    <footer>الدخول للوحة الأدمن محمي بتسجيل الدخول والتحقق من الصلاحيات.</footer>
-  </main>
+  <main id="role-gateway">
+<header class="gate-top">
+  <a class="brand-lockup" href="/" aria-label="Saffron Table homepage">
+    <span class="brand-monogram">S.</span><span class="brand-word">SAFFRON TABLE<small>DINING · BEYOND ORDINARY</small></span>
+  </a>
+  <div class="top-meta">PRIVATE ACCESS · 01 / 02</div>
+</header>
+<section class="gateway-hero">
+  <div class="stage" aria-hidden="true">
+    <div class="ring ring-one"></div><div class="ring ring-two"></div><div class="ring ring-three"></div>
+    <div class="stage-core">S.</div><i class="spark"></i><i class="spark two"></i>
+  </div>
+  <div class="eyebrow">SAFFRON TABLE · ACCESS GATEWAY</div>
+  <h1>Two entrances.<br><span>One extraordinary table.</span></h1>
+  <p>اختار المساحة المناسبة ليك. تجربة الزبون مستقلة عن أدوات إدارة المطعم، وكل دخول بيتراجع حسب صلاحيات الحساب الفعلية.</p>
+</section>
+<section class="gates" aria-label="Choose your access area">
+  <a class="gate customer" href="/customer.html">
+    <div class="gate-topline"><span class="gate-index">01 / GUEST</span><span>PERSONAL SPACE</span></div>
+    <div class="gate-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 20v-1.3a6.5 6.5 0 0 1 13 0V20"/><path d="M3 4.5h2M19 4.5h2"/></svg></div>
+    <h2>مساحة الزبون</h2>
+    <p>ادخل على طلباتك وحجوزاتك، تابع تفاصيل زيارتك، أو أنشئ حساب زبون جديد بكل سهولة.</p>
+    <div class="gate-bottom"><strong>دخول الزبائن / إنشاء حساب</strong><span class="gate-arrow" aria-hidden="true">←</span></div>
+  </a>
+  <a class="gate admin" href="/admin.html">
+    <div class="gate-topline"><span class="gate-index">02 / STAFF</span><span>RESTRICTED CONSOLE</span></div>
+    <div class="gate-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="1.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1.2"/><path d="M12 16.2v1.8"/></svg></div>
+    <h2>بوابة إدارة المطعم</h2>
+    <p>لوحة تشغيل محمية لإدارة الطلبات والحجوزات وحسابات الزبائن — مخصصة للأدمن وفريق المطعم المصرّح لهم فقط.</p>
+    <div class="gate-bottom"><strong>دخول الأدمن المصرّح له</strong><span class="gate-arrow" aria-hidden="true">←</span></div>
+  </a>
+</section>
+<div class="security-line"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 19 6v5c0 4.5-3 7.5-7 10-4-2.5-7-5.5-7-10V6z"/><path d="m9 12 2 2 4-4"/></svg><span>اختيار البوابة لا يمنح صلاحيات — قاعدة البيانات هي اللي بتحدد مين زبون ومين أدمن.</span></div>
+<div class="site-return"><a href="/">↗ العودة لتجربة المطعم الرئيسية</a></div>
+</main>
+<script>
+(function(){
+ const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(reduced||!window.matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+ document.querySelectorAll('.gate').forEach(function(card){
+  card.addEventListener('pointermove',function(e){
+   const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+   card.style.setProperty('--px',(x*100).toFixed(1)+'%');card.style.setProperty('--py',(y*100).toFixed(1)+'%');
+   card.style.transform='perspective(1000px) rotateX('+((.5-y)*3.5).toFixed(2)+'deg) rotateY('+((x-.5)*4).toFixed(2)+'deg) translateY(-3px)';
+  });
+  card.addEventListener('pointerleave',function(){card.style.transform='';card.style.setProperty('--px','50%');card.style.setProperty('--py','0%')});
+ });
+})();
+</script>
 </body>
 </html>
