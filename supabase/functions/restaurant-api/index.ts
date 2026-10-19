@@ -92,8 +92,13 @@ async function staffAdminAction(action: string, body: Json, req: Request, origin
   const access = await requireStaff(req);
   if ("error" in access) return respond(access.status, {ok:false,error:access.error}, origin);
   if (action === "staff_list_customers") {
-    const rows = await api("restaurant_customers?select=user_id,email,display_name,phone,status,created_at,updated_at&order=created_at.desc&limit=500");
-    return respond(200,{ok:true,customers:rows},origin);
+    const [rows, staffRows] = await Promise.all([
+      api("restaurant_customers?select=user_id,email,display_name,phone,status,created_at,updated_at&order=created_at.desc&limit=500"),
+      api("restaurant_staff?select=user_id")
+    ]);
+    const staffIds = new Set(Array.isArray(staffRows) ? staffRows.map((x: {user_id:string}) => x.user_id) : []);
+    const customers = Array.isArray(rows) ? rows.filter((x: {user_id:string}) => !staffIds.has(x.user_id)) : [];
+    return respond(200,{ok:true,customers},origin);
   }
   const target = text(body.user_id, 36);
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(target)) {
