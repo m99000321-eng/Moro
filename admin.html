@@ -58,11 +58,12 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;ba
 <div class="hero"><div><div class="eyebrow">LIVE OPERATIONS · SAFFRON TABLE</div><h1>Every order.<br><em>One place.</em></h1><p class="muted">Review requests, update order progress and manage table reservations. Changes are stored in the production database.</p></div><button class="button" id="refreshBtn">↻ Refresh</button></div>
 <div class="metrics"><div class="metric"><label>Orders today</label><strong id="mOrders">—</strong></div><div class="metric"><label>Awaiting action</label><strong id="mPending">—</strong></div><div class="metric"><label>Reservations today</label><strong id="mReservations">—</strong></div><div class="metric"><label>Customer accounts</label><strong id="mCustomers">—</strong></div></div>
 <div id="globalMessage"></div>
-<div class="tabs" role="tablist"><button class="tab active" data-tab="orders">Orders</button><button class="tab" data-tab="reservations">Reservations</button><button class="tab" data-tab="customers">Customers</button><button class="tab" data-tab="newsletter">Newsletter</button></div>
+<div class="tabs" role="tablist"><button class="tab active" data-tab="orders">Orders</button><button class="tab" data-tab="reservations">Reservations</button><button class="tab" data-tab="customers">Customers</button><button class="tab" data-tab="newsletter">Newsletter</button><button class="tab" data-tab="menu">Menu availability</button></div>
 <section class="panel" data-panel="orders"><div class="toolbar"><h2>Incoming orders</h2><span class="muted" id="ordersMeta"></span></div><div class="list" id="ordersList"><div class="empty">Loading orders…</div></div></section>
 <section class="panel" data-panel="reservations" hidden><div class="toolbar"><h2>Table reservations</h2><span class="muted" id="reservationsMeta"></span></div><div class="list" id="reservationsList"><div class="empty">Loading reservations…</div></div></section>
 <section class="panel" data-panel="customers" hidden><div class="toolbar"><h2>Customer accounts</h2><span class="muted" id="customersMeta"></span></div><p class="note">Suspend access to block customer actions. Permanent deletion removes their sign-in account. Staff accounts are protected.</p><div class="list" id="customersList"><div class="empty">Loading customers…</div></div></section>
 <section class="panel" data-panel="newsletter" hidden><div class="toolbar"><h2>Newsletter leads</h2><span class="muted" id="newsletterMeta"></span></div><div class="list" id="newsletterList"><div class="empty">Loading contacts…</div></div></section>
+<section class="panel" data-panel="menu" hidden><div class="toolbar"><h2>Live menu availability</h2><span class="muted" id="catalogMeta"></span></div><p class="note">Turn items on or off. The public restaurant menu will update from the same catalog, and unavailable items will be removed from customer carts.</p><div class="list" id="catalogList"><div class="empty">Loading menu…</div></div></section>
 <p class="note">Payment is currently cash on delivery or pay-at-pickup. Newsletter entries are pending confirmation until an email service is connected. Keep staff credentials private and only enable trusted staff accounts.</p>
 </section>
 </main>
@@ -75,7 +76,7 @@ const db=createClient(SUPABASE_URL,SUPABASE_KEY);
 const $=(s)=>document.querySelector(s);
 const states={pending:"Pending",confirmed:"Confirmed",preparing:"Preparing",ready:"Ready for pickup",out_for_delivery:"Out for delivery",completed:"Completed",cancelled:"Cancelled"};
 const reservationStates={pending:"Pending",confirmed:"Confirmed",cancelled:"Cancelled",completed:"Completed"};
-let currentUser=null,staff=null,orders=[],reservations=[],subscribers=[],customers=[],refreshTimer=null;
+let currentUser=null,staff=null,orders=[],reservations=[],subscribers=[],customers=[],catalog=[],refreshTimer=null;
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function money(v){return new Intl.NumberFormat("en-EG",{style:"currency",currency:"EGP",maximumFractionDigits:0}).format(Number(v)||0)}
 function localDate(d=new Date()){const x=new Date(d);return x.toLocaleDateString("en-CA",{timeZone:"Africa/Cairo"});}
@@ -99,17 +100,22 @@ async function loadAll(){
  ]);
  const err=results.find(x=>x.error)?.error;
  if(err){message("Could not load restaurant records: "+err.message);return;}
- let customerResult;
- try{customerResult=await staffAction("staff_list_customers");}
- catch(e){message("Could not load customer accounts: "+(e.message||"Access denied."));return;}
+ let customerResult,catalogResult;
+ try{[customerResult,catalogResult]=await Promise.all([staffAction("staff_list_customers"),staffAction("staff_list_catalog")]);}
+ catch(e){message("Could not load staff data: "+(e.message||"Access denied."));return;}
  if(!customerResult.ok){message("Could not load customer accounts: "+(customerResult.error||"Access denied."));return;}
- orders=results[0].data||[];reservations=results[1].data||[];subscribers=results[2].data||[];customers=customerResult.customers||[];
+ if(!catalogResult.ok){message("Could not load the menu catalog: "+(catalogResult.error||"Access denied."));return;}
+ orders=results[0].data||[];reservations=results[1].data||[];subscribers=results[2].data||[];customers=customerResult.customers||[];catalog=catalogResult.items||[];
  const today=localDate();
  $("#mOrders").textContent=orders.filter(o=>String(o.created_at).slice(0,10)===today).length;
  $("#mPending").textContent=orders.filter(o=>["pending","confirmed","preparing"].includes(o.status)).length;
  $("#mReservations").textContent=reservations.filter(r=>r.reservation_date===today&&r.status!=="cancelled").length;
  $("#mCustomers").textContent=customers.length;
- renderOrders();renderReservations();renderSubscribers();renderCustomers();
+ renderOrders();renderReservations();renderSubscribers();renderCustomers();renderCatalog();
+}
+function renderCatalog(){
+ $("#catalogMeta").textContent=catalog.length+" menu items · "+catalog.filter(item=>item.available).length+" available";
+ $("#catalogList").innerHTML=catalog.length?catalog.map(item=>'<article class="record"><div class="record-head"><div><div class="record-ref">#'+esc(item.product_id)+' · '+esc(item.category)+'</div><h3>'+esc(item.name_en)+'</h3><div class="muted">'+esc(item.name_ar)+' · '+money(item.price_egp)+'</div></div><span class="badge">'+(item.available?"Available":"Hidden from menu")+'</span></div><div class="record-actions"><button class="button '+(item.available?"":"primary")+'" type="button" data-catalog-action="toggle" data-id="'+esc(item.product_id)+'">'+(item.available?"Mark unavailable":"Make available")+'</button></div></article>').join(""):'<div class="empty">No menu items found.</div>';
 }
 function statusSelect(record,choices,kind){
  const status=record.status;
@@ -177,6 +183,18 @@ function renderSubscribers(){
  $("#newsletterMeta").textContent=subscribers.length+" records";
  $("#newsletterList").innerHTML=subscribers.length?subscribers.map(s=>'<article class="record"><div class="record-head"><div><h3>'+esc(s.email)+'</h3><div class="muted">Saved '+esc(new Date(s.created_at).toLocaleString("en-EG",{dateStyle:"medium",timeStyle:"short",timeZone:"Africa/Cairo"}))+'</div></div><span class="badge">'+esc(s.status.replaceAll("_"," "))+'</span></div></article>').join(""):'<div class="empty">No email leads yet.</div>';
 }
+document.addEventListener("click",async e=>{
+ const button=e.target.closest("button[data-catalog-action]");if(!button)return;
+ const item=catalog.find(row=>String(row.product_id)===button.dataset.id);if(!item)return;
+ button.disabled=true;
+ try{
+  const result=await staffAction("staff_update_catalog",{product_id:Number(item.product_id),available:!item.available});
+  if(!result.ok)throw new Error(result.error||"Could not update menu availability.");
+  message((result.item.available?"Menu item is now available.":"Menu item is now hidden from the public menu."),"success");
+  await loadAll();
+ }catch(err){message(err.message||"Could not update menu availability.");}
+ finally{button.disabled=false;}
+});
 document.addEventListener("change",async e=>{
  const select=e.target.closest("select[data-status-kind]");if(!select)return;
  const kind=select.dataset.statusKind,id=select.dataset.id,newStatus=select.value;
