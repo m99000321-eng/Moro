@@ -270,7 +270,148 @@ html[dir=rtl] .world-progress-track{direction:ltr}html[dir=rtl] .world-copy{text
  .world-footnote{margin-top:13px;padding-top:9px}
  .world-stage-bottom{font-size:6px}
 }
-</style></head><body>
+</style><style id="cinematic-world-upgrade">
+:root{--ink:#090b09;--cream:#f0eee5;--paper:#11140f;--olive:#b9d75b;--lime:#d5ff65;--gold:#d49a54;--muted:#a2a596;--line:#30352b;--shadow:0 28px 85px #0009}
+html{background:#090b09;scroll-padding-top:78px}
+body{background:#0b0d0a;color:#f0eee5}
+.announcement{background:linear-gradient(90deg,#10140b,#29311b 48%,#10140b);color:#e9e8da;border-bottom:1px solid #d5ff651c}
+.header{height:76px;background:#0b0d0ae8;border-bottom:1px solid #d5ff651f;color:#f4f0e6}
+.brand-mark{border-color:#b7d75d;color:#d5ff65;box-shadow:0 0 22px #d5ff650d}
+.brand-name small{color:#c3d77d}
+.nav a{color:#c6c7b8}.nav a:hover{color:#d5ff65}
+.lang{border-color:#4a4f3c;color:#e9e6d9}.cart-button{background:#d5ff65;color:#10130b;border-color:#d5ff65}.cart-count{background:#ff7447;color:#fff}
+.menu-toggle{border-color:#4a4f3c;color:#f2eee3}
+.hero{min-height:min(850px,calc(100svh - 76px));background:#090b09}
+.hero:before{background:linear-gradient(90deg,#080b08f7 0%,#080b08d9 34%,#080b0880 62%,#080b0840 100%),url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2200&q=90') center 52%/cover}
+.hero-inner{min-height:min(850px,calc(100svh - 76px));grid-template-columns:1fr 1fr;gap:clamp(16px,4vw,70px);padding-block:clamp(40px,7vh,90px) 90px}
+.hero h1{font-size:clamp(58px,7.2vw,104px);line-height:.91;letter-spacing:-.07em;text-wrap:balance}
+.hero h1 em{color:#d5ff65;text-shadow:0 0 50px #d5ff6518}
+.eyebrow{color:#d5ff65;letter-spacing:.22em}
+.hero-desc{font-size:clamp(13px,1.1vw,15px);color:#d1d0c4;max-width:455px}
+.btn{transition:transform .35s cubic-bezier(.2,.8,.2,1),background .3s,box-shadow .3s,border-color .3s}
+.btn-primary{background:linear-gradient(110deg,#c7eb58,#e6ff9a 55%,#b9d75b);color:#10130a;box-shadow:0 10px 34px #d5ff6517}
+.btn-primary:hover{background:#efffc1;box-shadow:0 15px 42px #d5ff6526}
+.btn-ghost{border-color:#ffffff48;background:#ffffff05;backdrop-filter:blur(8px)}
+.hero-note{color:#c6c8b8}.stars{color:#ffb86c}
+.hero-visual{height:min(65vh,620px);min-height:390px;transform-style:preserve-3d}
+.hero-orbit{width:min(470px,105%);border-color:#d5ff6530;box-shadow:0 0 70px #d5ff6506}
+.hero-orbit:before{border-color:#ff8c4a29}.hero-orbit:after{border-color:#d5ff6533}
+.hero-dish{width:min(400px,82%);filter:drop-shadow(0 35px 40px #000b)}
+.floating-label{background:#11150eec;color:#f3f0e6;border:1px solid #d5ff6529;box-shadow:0 18px 55px #0008;backdrop-filter:blur(14px);padding:14px 16px}
+.floating-label small{color:#aaaF9b}.label-dot{background:#d5ff65;box-shadow:0 0 12px #d5ff65}
+.side-note{color:#c4c7b5a6}
+.hero-bottom{border-color:#ffffff21;background:linear-gradient(90deg,#090b09cc,#11150cbb,#090b09cc);backdrop-filter:blur(10px)}
+.hero-bottom-inner{color:#b8bcaa;letter-spacing:.16em}.hero-bottom b{color:#d5ff65}
+.trust{background:#0e110d;border-color:#2c3226}
+.trust-inner{padding:25px 0}
+.trust-item{color:#c8cbbb;border-color:#30352b}.trust-icon{color:#d5ff65}
+.section{background:#0b0d0a;color:#f0eee5;padding:clamp(70px,9vw,125px) 0}
+.section-head{margin-bottom:clamp(28px,4vw,48px)}
+.section-label{color:#c6e36d;letter-spacing:.2em}
+h2{color:#f4f0e5}
+h2 em{color:#c4df70}
+.section-intro{color:#a7ab9b}
+.menu-tools{margin-bottom:26px}
+.cat-btn{background:#10130e;border-color:#343a2b;color:#c5c8b8;transition:all .28s}
+.cat-btn:hover,.cat-btn.active{background:#d5ff65;border-color:#d5ff65;color:#11140c;box-shadow:0 8px 24px #d5ff6510}
+.search{background:#11140f;border-color:#3a4031;color:#f0eee5}
+.search input{color:#f0eee5}.search input::placeholder{color:#818675}
+.search svg{color:#b9d75b}
+.menu-grid{gap:clamp(12px,1.7vw,22px);perspective:1400px}
+.food-card{background:linear-gradient(145deg,#171b13,#0e100d);border:1px solid #ffffff15;box-shadow:0 15px 50px #0002;transform:perspective(1000px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)) translateY(0);transform-style:preserve-3d;transition:transform .22s ease,border-color .35s,box-shadow .35s}
+.food-card:hover{transform:perspective(1000px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)) translateY(-8px);box-shadow:0 30px 80px #0009;border-color:#d5ff6555}
+.food-img-wrap{background:#181b13}
+.food-img{filter:saturate(.9) contrast(1.04);transition:transform .85s cubic-bezier(.16,.8,.2,1),filter .6s}
+.food-card:hover .food-img{transform:scale(1.075);filter:saturate(1.12) contrast(1.06)}
+.food-badge{background:#0d100de8;color:#d5ff65;border:1px solid #d5ff6538;backdrop-filter:blur(8px)}
+.food-fav{background:#0d100de8;color:#f2eee1;border:1px solid #ffffff24}
+.food-fav.active{background:#ff7447;color:#fff}
+.food-body{padding:20px}
+.food-meta{color:#c3df70}.rating{color:#ffbd77}
+.food-name{color:#f3eee2;font-size:clamp(20px,1.8vw,25px)}
+.food-desc{color:#a6aa9a}
+.food-foot{border-color:#30352a}
+.price{color:#f5f0e5}.price small{color:#a5aa98}
+.add-btn{background:#d5ff65;border-color:#d5ff65;color:#11140b}
+.add-btn:hover{background:#efffc1;border-color:#efffc1}
+.menu-bottom{color:#a8ad9a}
+.special{background:#10140e;color:#f0eee5;border-block:1px solid #d5ff6518}
+.special-visual{background:#1b2115}.special-visual:after{background:linear-gradient(0deg,#090b09bb,transparent 65%),linear-gradient(90deg,#090b0922,transparent)}
+.special-stamp{background:#d5ff65;color:#11140b;box-shadow:0 10px 30px #0006}
+.special-copy .section-label{color:#d5ff65}
+.special-copy p{color:#b8bcad}
+.special-price{color:#d5ff65}
+.about-grid{gap:clamp(35px,6vw,88px)}
+.about-visual{min-height:clamp(330px,42vw,520px)}
+.about-photo{background:#151a10;box-shadow:0 25px 80px #0008}
+.about-outline{border-color:#d5ff6575}
+.about-note{background:#1b2114;border:1px solid #d5ff6538;color:#f0eee5;box-shadow:0 20px 55px #0008}
+.about-note span{color:#c0c6ad}
+.about-copy>p{color:#adb2a0}
+.values{color:#d5d8ca}.values strong{color:#f4f0e5}
+.reservation{background:radial-gradient(ellipse at 0% 50%,#d5ff6509,transparent 42%),#10130e;border-block:1px solid #ffffff12}
+.reservation-copy>p{color:#b2b7a5}
+.res-detail{color:#d1d4c6}.res-icon{border-color:#49513a;color:#d5ff65}
+.booking-form{background:linear-gradient(145deg,#1a1e15,#10130e);border:1px solid #d5ff6528;box-shadow:0 30px 90px #0008}
+.form-title{color:#f4f0e5}.form-sub{color:#a8ad9b}
+.field label{color:#d2d6c6}
+.field input,.field select,.field textarea{background:#0a0c09;border-color:#3c4332;color:#f3f0e6}
+.field input::placeholder,.field textarea::placeholder{color:#777e6b}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#d5ff65;box-shadow:0 0 0 3px #d5ff6512}
+.form-note{color:#969c88}
+.kinetic-ribbon{background:#d5ff65;color:#10130a;border-color:#d5ff65;box-shadow:0 12px 40px #0003}
+.kinetic-track i{color:#ff7447}
+.footer{background:#070907;border-top:1px solid #d5ff6524}
+.footer .brand-mark{border-color:#d5ff65;color:#d5ff65}
+.footer .brand-name small,.footer-title{color:#d5ff65}
+.footer-blurb,.footer-links a,.footer-links span{color:#aeb3a0}
+.footer-links a:hover{color:#efffc1}
+.newsletter{border-color:#525b3c}.newsletter input{color:#f2efe4}.newsletter button{color:#d5ff65}
+.footer-bottom{border-color:#252b21;color:#808777}
+.overlay{background:#020302d9;backdrop-filter:blur(12px)}
+.drawer,.modal{background:#11140f;color:#f2eee3;border:1px solid #d5ff6526;box-shadow:0 30px 100px #000c}
+.drawer-head{border-color:#30362a}.drawer-head h3,.modal-head h3{color:#f2eee3}
+.icon-button{border-color:#3c4332;color:#f2eee3}
+.cart-row{border-color:#30362a}.cart-empty{color:#a8ad9b}
+.modal-desc{color:#a8ad9b}.success-mark{background:#d5ff65;color:#11140b}
+.world-story{background:#070907;color:#f4f0e5;border-color:#d5ff6519}
+.world-sticky:before{background:radial-gradient(ellipse at 76% 50%,#d5ff6510 0%,transparent 42%),radial-gradient(ellipse at 4% 96%,#ff74470d,transparent 35%),linear-gradient(132deg,#070907,#11150e 52%,#080a08)}
+.world-sticky:after{opacity:.12;background-image:linear-gradient(#d5ff6510 1px,transparent 1px),linear-gradient(90deg,#d5ff6510 1px,transparent 1px)}
+.world-atmosphere{background:#ff744708}
+.world-kicker{color:#d5ff65}.world-live-dot{background:#d5ff65;box-shadow:0 0 16px #d5ff6580}
+.world-beat h2 em{background:linear-gradient(110deg,#d5ff65 8%,#fff2cb 44%,#ff8d54 90%);color:transparent;background-clip:text;-webkit-background-clip:text}
+.world-beat p{color:#b8bcad}
+.world-cta{background:linear-gradient(110deg,#c5e95a,#e7ff9b);border-color:#d5ff65;color:#11140a;box-shadow:0 12px 38px #d5ff6510}
+.world-cta:hover{box-shadow:0 18px 48px #d5ff6526}
+.world-footnote{border-color:#ffffff20;color:#8b9380}
+.world-stage:before{background:radial-gradient(ellipse at center,#d5ff650b,transparent 57%)}
+.world-stage:after{border-color:#d5ff6520;box-shadow:0 0 70px #d5ff6507,inset 0 0 70px #ff744706}
+.world-stage-top{color:#d8dacb}#worldStageCount{color:#d5ff65}
+.world-orbit-label{color:#d5ff65;border-color:#d5ff6533;background:#080a08d9}
+.orbit-label-b{color:#ffb36b;border-color:#ff9b5644}
+.world-stage-bottom{color:#a2a895}.world-stage-bottom span:nth-child(even){color:#ff8b4f}
+.world-progress-track{background:#ffffff12}#worldProgressFill{background:linear-gradient(90deg,#d5ff65,#ff8c4b,#e4c477)}
+.world-css-fallback{box-shadow:0 35px 70px #000b,0 0 0 1px #d5ff6525}
+.reveal{transition:opacity .9s,transform 1s cubic-bezier(.16,.8,.2,1),filter .9s}
+#cinematicProgress{position:fixed;top:0;left:0;width:100%;height:2px;z-index:100;background:#ffffff0c;pointer-events:none}
+#cinematicProgress span{display:block;width:100%;height:100%;background:linear-gradient(90deg,#d5ff65,#ff7447);transform:scaleX(0);transform-origin:left center}
+html[dir=rtl] #cinematicProgress span{transform-origin:right center}
+@media(max-width:760px){
+ .hero{min-height:auto}.hero-inner{min-height:auto;grid-template-columns:1fr;gap:10px;padding-top:52px;padding-bottom:80px}
+ .hero h1{font-size:clamp(53px,13vw,80px)}.hero-visual{height:min(80vw,410px);min-height:300px;margin-top:0}
+ .floating-label{padding:10px 11px;font-size:9px}.float-a{left:0;top:9%}.float-b{right:0;bottom:8%}
+ .trust-inner{grid-template-columns:repeat(2,1fr);gap:0}.trust-item{min-height:52px;border-bottom:1px solid #30352b}.trust-item:nth-child(2){border-inline-end:0}.trust-item:nth-child(n+3){border-bottom:0}
+ .section{padding:72px 0}.section-head{align-items:start;flex-direction:column;gap:17px}
+ .menu-tools{align-items:stretch;flex-direction:column}.search{width:100%}.menu-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .food-body{padding:12px}.food-name{font-size:18px}.food-desc{font-size:10px;min-height:48px}.food-foot{align-items:start;flex-direction:column}.add-btn{width:100%}
+ .special-grid,.about-grid,.reservation-grid{grid-template-columns:1fr;gap:28px}.special-visual{min-height:310px}.special-copy{padding:30px 24px 38px}
+ .about-visual{min-height:330px}.reservation-grid{gap:30px}.booking-form{padding:23px}
+ .footer-main{grid-template-columns:1fr 1fr;gap:28px}.footer-main>div:first-child,.footer-main>div:last-child{grid-column:1/-1}
+}
+@media(max-width:390px){.menu-grid{grid-template-columns:1fr}.food-img-wrap{aspect-ratio:1.55}.food-foot{align-items:center;flex-direction:row}.add-btn{width:auto}.hero h1{font-size:53px}.hero-visual{min-height:270px}}
+@media(prefers-reduced-motion:reduce){#cinematicProgress{display:none}.food-card{transform:none!important}}
+</style>
+</head><body>
 <div class="announcement" data-i18n="announcement">A LITTLE SOMETHING SPECIAL <b>·</b> YOUR TABLE IS WAITING <b>·</b> MADE FRESH, ALWAYS</div>
 <header class="header container"><a class="brand" href="#home" aria-label="Saffron Table home"><span class="brand-mark">S</span><span class="brand-name">SAFFRON TABLE<small data-i18n="brandTag">KITCHEN · GATHER · ENJOY</small></span></a><nav class="nav" id="mainNav" aria-label="Main navigation"><a href="#menu" data-i18n="navMenu">Our menu</a><a href="#experience" data-i18n="navExperience">Experience</a><a href="#story" data-i18n="navStory">Our story</a><a href="#visit" data-i18n="navVisit">Find us</a><a href="#reserve" data-i18n="navReserve">Reservations</a><a href="/customer.html" data-i18n="navAccount">My account</a></nav><div class="actions"><button class="lang" id="languageBtn" aria-label="Switch website language">عربي</button><button class="cart-button" id="openCart" aria-label="Open shopping cart"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/></svg><span class="cart-word" data-i18n="cart">Order</span><span class="cart-count" id="cartCount">0</span></button><button class="menu-toggle" id="mobileMenu" aria-label="Open navigation" aria-expanded="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button></div></header>
 <main>
@@ -542,4 +683,20 @@ if(params.get("resume")==="checkout"){
  requestAnimationFrame(()=>document.getElementById("reserve")?.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}));
  history.replaceState(null,"",location.pathname+"#reserve");
 }
-</script></body></html>
+</script><script id="cinematic-interaction-upgrade">
+(function(){
+ const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const bar=document.createElement('div');bar.id='cinematicProgress';bar.innerHTML='<span></span>';document.body.appendChild(bar);
+ const fill=bar.firstElementChild;let queued=false;
+ function update(){const max=document.documentElement.scrollHeight-window.innerHeight;const p=max>0?Math.min(1,Math.max(0,window.scrollY/max)):0;fill.style.transform='scaleX('+p+')';}
+ window.addEventListener('scroll',function(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;update()})},{passive:true});window.addEventListener('resize',update,{passive:true});update();
+ if(reduced)return;
+ const cards=[...document.querySelectorAll('.food-card')];
+ if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+  cards.forEach(card=>{card.addEventListener('pointermove',function(e){const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;card.style.setProperty('--tilt-x',((.5-y)*5).toFixed(2)+'deg');card.style.setProperty('--tilt-y',((x-.5)*6).toFixed(2)+'deg');});card.addEventListener('pointerleave',function(){card.style.setProperty('--tilt-x','0deg');card.style.setProperty('--tilt-y','0deg')})});
+ }
+ const imgs=[...document.querySelectorAll('.special-visual img,.about-photo img')];
+ if('IntersectionObserver'in window){const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('cinematic-in-view');io.unobserve(e.target)}}),{threshold:.12});imgs.forEach(im=>io.observe(im))}
+})();
+</script>
+</body></html>
