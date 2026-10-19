@@ -162,9 +162,7 @@ h2 em{color:#d5ff00}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.reveal{filter:none;transform:none}}
 </style>
 <style id="world-story-responsive">
-/* A real responsive 3D hero layered above the existing CSS-art fallback. */
-.hero-food-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2;pointer-events:none;opacity:1}
-.hero-visual.webgl-ready .hero-dish{opacity:0;visibility:hidden}
+/* Reliable CSS food artwork; no video, WebGL, or external 3D engine required. */
 .hero-visual.webgl-ready .hero-orbit{z-index:1}
 .hero-visual.webgl-ready .floating-label,.hero-visual.webgl-ready .side-note{z-index:5}
 .world-story{height:285svh;min-height:2050px;position:relative;isolation:isolate;background:#070810;color:#f5f5eb;overflow:clip;border-block:1px solid #ffffff14}
@@ -495,7 +493,7 @@ footer a:hover,.footer a:hover{color:#d5ff65}
 <div class="announcement" data-i18n="announcement">A LITTLE SOMETHING SPECIAL <b>·</b> YOUR TABLE IS WAITING <b>·</b> MADE FRESH, ALWAYS</div>
 <header class="header container"><a class="brand" href="#home" aria-label="Saffron Table home"><span class="brand-mark">S</span><span class="brand-name">SAFFRON TABLE<small data-i18n="brandTag">KITCHEN · GATHER · ENJOY</small></span></a><nav class="nav" id="mainNav" aria-label="Main navigation"><a href="#menu" data-i18n="navMenu">Our menu</a><a href="#experience" data-i18n="navExperience">Experience</a><a href="#story" data-i18n="navStory">Our story</a><a href="#visit" data-i18n="navVisit">Find us</a><a href="#reserve" data-i18n="navReserve">Reservations</a><a href="/portal.html" data-i18n="navAccount">My account</a></nav><div class="actions"><button class="lang" id="languageBtn" aria-label="Switch website language">عربي</button><button class="cart-button" id="openCart" aria-label="Open shopping cart"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/></svg><span class="cart-word" data-i18n="cart">Order</span><span class="cart-count" id="cartCount">0</span></button><button class="menu-toggle" id="mobileMenu" aria-label="Open navigation" aria-expanded="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button></div></header>
 <main>
-<section class="hero" id="home"><div class="container hero-inner"><div class="hero-copy"><div class="eyebrow" data-i18n="eyebrow">GOOD FOOD. BETTER COMPANY.</div><h1 data-i18n="heroTitle">A taste worth<br><em>gathering</em> for.</h1><p class="hero-desc" data-i18n="heroDesc">Seasonal ingredients, honest cooking, and the kind of table where one more plate is always a good idea.</p><div class="hero-buttons"><a href="#menu" class="btn btn-primary"><span data-i18n="exploreMenu">Explore the menu</span><span aria-hidden="true">↗</span></a><a href="#reserve" class="btn btn-ghost"><span data-i18n="bookTable">Book a table</span><span aria-hidden="true">↗</span></a></div><div class="hero-note"><span class="stars">★★★★★</span><span data-i18n="heroRating">Made with care, served with love</span><span>✳ <span data-i18n="freshDaily">Fresh every day</span></span></div></div><div class="hero-visual" id="heroVisual" aria-label="Interactive three-dimensional food artwork"><canvas id="heroFoodCanvas" class="hero-food-canvas" aria-label="A signature dish rendered in 3D"></canvas><div class="hero-orbit"></div><div class="hero-dish"></div><div class="floating-label float-a"><span class="label-dot"></span><span><strong data-i18n="seasonal">Seasonal & fresh</strong><small data-i18n="seasonalSub">Good ingredients first</small></span></div><div class="floating-label float-b"><span><strong data-i18n="madeLove">Made with love</strong><small data-i18n="madeLoveSub">A little extra in every bite</small></span><span class="stars">✦</span></div><div class="side-note">SAFFRON TABLE · EST. 2024</div></div></div><div class="hero-bottom"><div class="container hero-bottom-inner"><span><b>01 —</b> <span data-i18n="craft">THE CRAFT OF GOOD FOOD</span></span><span data-i18n="scrollDiscover">SCROLL TO DISCOVER ↓</span><span>CAREFULLY SOURCED · BEAUTIFULLY SERVED</span></div></div></section>
+<section class="hero" id="home"><div class="container hero-inner"><div class="hero-copy"><div class="eyebrow" data-i18n="eyebrow">GOOD FOOD. BETTER COMPANY.</div><h1 data-i18n="heroTitle">A taste worth<br><em>gathering</em> for.</h1><p class="hero-desc" data-i18n="heroDesc">Seasonal ingredients, honest cooking, and the kind of table where one more plate is always a good idea.</p><div class="hero-buttons"><a href="#menu" class="btn btn-primary"><span data-i18n="exploreMenu">Explore the menu</span><span aria-hidden="true">↗</span></a><a href="#reserve" class="btn btn-ghost"><span data-i18n="bookTable">Book a table</span><span aria-hidden="true">↗</span></a></div><div class="hero-note"><span class="stars">★★★★★</span><span data-i18n="heroRating">Made with care, served with love</span><span>✳ <span data-i18n="freshDaily">Fresh every day</span></span></div></div><div class="hero-visual" id="heroVisual" aria-label="Signature dish artwork"><div class="hero-orbit"></div><div class="hero-dish"></div><div class="floating-label float-a"><span class="label-dot"></span><span><strong data-i18n="seasonal">Seasonal & fresh</strong><small data-i18n="seasonalSub">Good ingredients first</small></span></div><div class="floating-label float-b"><span><strong data-i18n="madeLove">Made with love</strong><small data-i18n="madeLoveSub">A little extra in every bite</small></span><span class="stars">✦</span></div><div class="side-note">SAFFRON TABLE · EST. 2024</div></div></div><div class="hero-bottom"><div class="container hero-bottom-inner"><span><b>01 —</b> <span data-i18n="craft">THE CRAFT OF GOOD FOOD</span></span><span data-i18n="scrollDiscover">SCROLL TO DISCOVER ↓</span><span>CAREFULLY SOURCED · BEAUTIFULLY SERVED</span></div></div></section>
 <section class="trust"><div class="container trust-inner"><div class="trust-item"><span class="trust-icon">✳</span><span data-i18n="trust1">Fresh, quality ingredients</span></div><div class="trust-item"><span class="trust-icon">♧</span><span data-i18n="trust2">Made to order</span></div><div class="trust-item"><span class="trust-icon">♡</span><span data-i18n="trust3">Something for everyone</span></div><div class="trust-item"><span class="trust-icon">✦</span><span data-i18n="trust4">A table worth sharing</span></div></div></section>
 
 <section class="world-story" id="experience" aria-label="An immersive story of a signature dish">
@@ -524,7 +522,7 @@ footer a:hover,.footer a:hover{color:#d5ff65}
       <div class="world-footnote"><span>SAFFRON TABLE®</span><span data-i18n="worldFoot">CRAFTED FOR THE SENSES</span></div>
     </div>
     <div class="world-stage" id="worldStage">
-      <div class="world-css-fallback" aria-hidden="true"></div><canvas id="worldFoodCanvas" aria-label="Interactive three-dimensional plated dish"></canvas>
+      <div class="world-css-fallback" aria-hidden="true"></div>
       <div class="world-stage-top"><span><i class="world-live-dot"></i><span data-i18n="worldHUD">LIVE FOOD STUDY</span></span><span id="worldStageCount">01 <b>/</b> 03</span></div>
       <div class="world-orbit-label orbit-label-a">FRESH / 100%</div>
       <div class="world-orbit-label orbit-label-b">CRAFT / EST. 2024</div>
@@ -650,127 +648,7 @@ if(!reduced&&window.matchMedia('(hover:hover) and (pointer:fine)').matches){
 }
 })();
 </script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.min.js"></script>
-<script id="world-three-engine">
-(function(){
-'use strict';
-const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if(!window.THREE)return;
-const T=window.THREE,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-const ease=v=>{v=clamp(v,0,1);return v*v*(3-2*v)};
-const material=(color,roughness=.42,metalness=.04)=>new T.MeshStandardMaterial({color,roughness,metalness});
-function createFood(canvas,exploded){
- if(!canvas)return null;let renderer;
- try{renderer=new T.WebGLRenderer({canvas,alpha:true,antialias:Math.min(window.devicePixelRatio||1,1.5)<1.5,powerPreference:'low-power',precision:'mediump'});}
- catch(e){return null;}
- const scene=new T.Scene(),camera=new T.PerspectiveCamera(34,1,.1,60);
- renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));
- renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.2;
- camera.position.set(0,3.2,8.1);camera.lookAt(0,-.1,0);
- scene.add(new T.HemisphereLight(0xffe7c5,0x171a10,1.8));
- let light=new T.DirectionalLight(0xffe8c6,3.2);light.position.set(-3,6,5);scene.add(light);
- light=new T.PointLight(0xd5ff65,20,16,2);light.position.set(3,2.5,3);scene.add(light);
- light=new T.PointLight(0xff7546,25,18,2);light.position.set(-4,2,-3);scene.add(light);
- light=new T.PointLight(0xffad62,13,15,2);light.position.set(2,-1,-4);scene.add(light);
- const root=new T.Group();scene.add(root);
- const plate=new T.Group(),pasta=new T.Group(),tomatoes=new T.Group(),greens=new T.Group(),cheese=new T.Group(),crumbs=new T.Group();
- [plate,pasta,tomatoes,greens,cheese,crumbs].forEach(g=>root.add(g));
- // Porcelain charger and hand-built food, all real, lit 3D geometry.
- const porcelain=material(0xf4efe2,.17,.18),base=material(0xaaa594,.28,.2);
- let mesh=new T.Mesh(new T.CylinderGeometry(2.05,1.94,.19,80),porcelain);mesh.position.y=-.39;plate.add(mesh);
- mesh=new T.Mesh(new T.CylinderGeometry(1.75,1.72,.09,72),base);mesh.position.y=-.51;plate.add(mesh);
- mesh=new T.Mesh(new T.CylinderGeometry(1.77,1.77,.022,80),material(0xfffbee,.2,.1));mesh.position.y=-.285;plate.add(mesh);
- function ring(group,r,tube,y,col,metal=.2){let m=new T.Mesh(new T.TorusGeometry(r,tube,8,100),material(col,.22,metal));m.rotation.x=Math.PI/2;m.position.y=y;group.add(m);return m;}
- ring(plate,1.92,.036,-.272,0xc6bfae,.55);ring(plate,1.72,.013,-.265,0xd5ff64,.25);
- mesh=new T.Mesh(new T.CylinderGeometry(1.36,1.36,.016,72),material(0x8a381b,.38));mesh.position.y=-.259;plate.add(mesh);
- ring(plate,1.30,.012,-.247,0xefae4c,.2);
- const noodleMats=[material(0xf4d184,.3),material(0xe5b65e,.38),material(0xffe2a7,.3)];
- for(let n=0;n<9;n++){
-  const points=[],phase=n*.63,turns=4.6+n*.05;
-  for(let j=0;j<=190;j++){const t=j/190,a=t*turns+phase,r=.11+.17*t;points.push(new T.Vector3(Math.cos(a)*r,-.17+.025*Math.sin(a*2+phase),Math.sin(a)*r*.88));}
-  const curve=new T.CatmullRomCurve3(points);
-  pasta.add(new T.Mesh(new T.TubeGeometry(curve,190,.035,7,false),noodleMats[n%3]));
- }
- const red=[material(0xe63521,.23),material(0xf45828,.26),material(0xffb331,.28)];
- for(let i=0;i<8;i++){
-  const a=i*Math.PI*2/8+.2,r=.77+(i%3)*.1;
-  const m=new T.Mesh(new T.SphereGeometry(.14+(i%2)*.025,18,14),red[i%3]);m.scale.set(1,.78,1);m.position.set(Math.cos(a)*r,-.12+(i%2)*.025,Math.sin(a)*r*.83);tomatoes.add(m);
-  const stem=new T.Mesh(new T.CylinderGeometry(.008,.014,.09,5),material(0x52742a,.62));stem.position.set(m.position.x,m.position.y+.11,m.position.z);stem.rotation.z=.35;tomatoes.add(stem);
- }
- const green=[material(0x36753b,.53),material(0x76a94a,.48),material(0x225539,.56)];
- for(let i=0;i<13;i++){
-  const a=i*2.399,r=.26+(i%4)*.16;
-  const leaf=new T.Mesh(new T.SphereGeometry(1,14,10),green[i%3]);
-  leaf.scale.set(.20+(i%3)*.025,.025,.085+(i%2)*.02);
-  leaf.position.set(Math.cos(a)*r,-.065+(i%3)*.01,Math.sin(a)*r*.8);leaf.rotation.y=-a;leaf.rotation.z=(i%2?.18:-.15);greens.add(leaf);
- }
- for(let i=0;i<7;i++){
-  const pts=[],a0=i*1.78;
-  for(let j=0;j<=40;j++){const t=j/40,a=t*Math.PI*2.6+a0;pts.push(new T.Vector3(Math.cos(a)*(.04+t*.02),-.025+t*.075,Math.sin(a)*(.04+t*.018)));}
-  cheese.add(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(pts),45,.018,5,false),material(0xffe4aa,.27)));
- }
- for(let i=0;i<38;i++){
-  const a=i*2.399,r=.25+(i%9)*.13;
-  const dot=new T.Mesh(new T.SphereGeometry(.016+(i%3)*.005,6,5),material(i%2?0xe5c77f:0xd5ff64,.6));
-  dot.position.set(Math.cos(a)*r,-.13+(i%4)*.024,Math.sin(a)*r*.83);crumbs.add(dot);
- }
- const orbit1=new T.Mesh(new T.TorusGeometry(2.55,.008,6,120),new T.MeshBasicMaterial({color:0xd5ff00,transparent:true,opacity:.7}));orbit1.rotation.x=1.14;root.add(orbit1);
- const orbit2=new T.Mesh(new T.TorusGeometry(2.88,.006,6,120),new T.MeshBasicMaterial({color:0xff8b4d,transparent:true,opacity:.5}));orbit2.rotation.x=1.3;root.add(orbit2);
- const positions=[];for(let i=0;i<190;i++)positions.push((Math.random()-.5)*7,(Math.random()-.5)*6,(Math.random()-.5)*3.5);
- const starGeo=new T.BufferGeometry();starGeo.setAttribute('position',new T.Float32BufferAttribute(positions,3));
- const stars=new T.Points(starGeo,new T.PointsMaterial({color:0xf2d8a0,size:.014,transparent:true,opacity:.58}));scene.add(stars);
- function resize(){const r=canvas.getBoundingClientRect(),w=Math.max(2,r.width),h=Math.max(2,r.height);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
- resize();
- return {resize,draw(time,px=0,py=0,progress=0){
-   const t=time*.001,p=clamp(progress,0,1);
-   const sep=exploded?(p<.32?0:(p<.7?ease((p-.32)/.38):.98*(1-ease((p-.7)/.3)) )):0;
-   pasta.position.y=-.02+sep*.24;
-   tomatoes.position.y=sep*1.05;greens.position.y=sep*1.64;cheese.position.y=sep*2.18;crumbs.position.y=sep*.52;
-   tomatoes.rotation.y=sep*.34;greens.rotation.y=-sep*.45;
-   root.rotation.y=t*(exploded?.105:.13)+px*.18+(exploded?p*.48:0);
-   root.rotation.x=.035+py*.09;
-   root.rotation.z=Math.sin(t*.32)*.018;
-   root.scale.setScalar(exploded?.92+p*.055:.94);
-   orbit1.rotation.z=t*.08;orbit2.rotation.z=-t*.045;
-   stars.rotation.y=t*.018;stars.rotation.x=Math.sin(t*.13)*.02;
-   camera.position.x=px*.28;camera.position.y=(exploded?3.8-p*.25:3.25)+py*.16;camera.position.z=exploded?9-p*.4:8.1;
-   camera.lookAt(0,-.1,0);renderer.render(scene,camera);
- }};
-}
-const hero=document.getElementById('heroVisual'),story=document.getElementById('experience');
-const heroScene=createFood(document.getElementById('heroFoodCanvas'),false),worldScene=createFood(document.getElementById('worldFoodCanvas'),true);
-if(heroScene&&hero)hero.classList.add('webgl-ready');if(worldScene){const stage=document.getElementById('worldStage');if(stage)stage.classList.add('webgl-ready');}
-let progress=0,px=0,py=0,heroVisible=true,worldVisible=false,lastStep=-1,queued=false;
-if(hero&&window.matchMedia('(hover:hover) and (pointer:fine)').matches){
- hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();px=clamp((e.clientX-r.left)/r.width-.5,-.5,.5)*2;py=clamp((e.clientY-r.top)/r.height-.5,-.5,.5)*2},{passive:true});
- hero.addEventListener('pointerleave',()=>{px=0;py=0},{passive:true});
-}
-function updateStory(){
- if(!story)return;const r=story.getBoundingClientRect(),dist=Math.max(1,story.offsetHeight-window.innerHeight);
- progress=clamp(-r.top/dist,0,1);
- const fill=document.getElementById('worldProgressFill');if(fill)fill.style.transform='scaleX('+progress+')';
- if(reduce&&worldScene)worldScene.draw(0,0,0,progress);
- const step=progress<.34?0:progress<.68?1:2;
- if(step!==lastStep){lastStep=step;document.querySelectorAll('[data-world-step]').forEach((el,i)=>el.classList.toggle('is-active',i===step));const count=document.getElementById('worldStageCount');if(count)count.innerHTML=('0'+(step+1)).slice(-2)+' <b>/</b> 03';}
-}
-window.addEventListener('scroll',()=>{if(!queued){queued=true;requestAnimationFrame(()=>{queued=false;updateStory()})}},{passive:true});
-window.addEventListener('resize',()=>{heroScene&&heroScene.resize();worldScene&&worldScene.resize();updateStory()},{passive:true});
-if('IntersectionObserver'in window){
- if(hero)new IntersectionObserver(es=>{heroVisible=es.some(e=>e.isIntersecting)},{rootMargin:'120px'}).observe(hero);
- if(story)new IntersectionObserver(es=>{worldVisible=es.some(e=>e.isIntersecting)},{rootMargin:'120px'}).observe(story);
-}
-if('ResizeObserver'in window){const ro=new ResizeObserver(()=>{heroScene&&heroScene.resize();worldScene&&worldScene.resize()});['heroFoodCanvas','worldFoodCanvas'].forEach(id=>{const el=document.getElementById(id);if(el&&el.parentElement)ro.observe(el.parentElement)})}
-// Keep the renderer alive for pointer and scroll interaction even with reduced motion enabled.
-function frame(t){
- const sceneTime=reduce?0:t;
- if(heroVisible&&heroScene)heroScene.draw(sceneTime,px,py,1);
- if(worldVisible&&worldScene)worldScene.draw(sceneTime,px*.3,py*.3,progress);
- requestAnimationFrame(frame);
-}
-updateStory();
-requestAnimationFrame(frame);
-})();
-</script>
+
 <script type="module" id="saffron-backend-client">
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.0";
 const SUPABASE_URL="https://erosjbwpjcgtoocltvqq.supabase.co";
