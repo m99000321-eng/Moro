@@ -235,6 +235,9 @@ create or replace function public.create_restaurant_reservation(p_customer_name 
 returns jsonb language plpgsql set search_path=public,pg_temp as $$
 declare v_id uuid; v_reference text;
 begin
+ if p_customer_id is null then raise exception using errcode='28000',message='AUTH_REQUIRED'; end if;
+ if not exists(select 1 from public.restaurant_customers c where c.user_id=p_customer_id and c.status='active') then raise exception using errcode='28000',message='CUSTOMER_SUSPENDED'; end if;
+ if exists(select 1 from public.restaurant_staff st where st.user_id=p_customer_id) then raise exception using errcode='28000',message='ADMIN_ACCOUNT_NOT_CUSTOMER'; end if;
  if length(trim(coalesce(p_customer_name,'')))<2 or length(trim(p_customer_name))>80 then raise exception using errcode='22023',message='INVALID_CUSTOMER_NAME'; end if;
  if coalesce(p_phone,'') !~ '^[+()0-9][+()0-9 .-]{5,24}$' then raise exception using errcode='22023',message='INVALID_PHONE'; end if;
  if p_reservation_date is null or p_reservation_date<(now() at time zone 'Africa/Cairo')::date then raise exception using errcode='22023',message='INVALID_RESERVATION_DATE'; end if;
