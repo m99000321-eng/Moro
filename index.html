@@ -803,4 +803,91 @@ if(params.get("resume")==="checkout"){
  if('IntersectionObserver'in window){const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('cinematic-in-view');io.unobserve(e.target)}}),{threshold:.12});imgs.forEach(im=>io.observe(im))}
 })();
 </script>
+
+<!-- Saffron interaction recovery: resilient delegated interactions for dynamic content and graceful 3D fallback. -->
+<style id="saffron-interaction-recovery">
+  .hero-visual:not(.webgl-ready) #heroFoodCanvas,
+  #worldStage:not(.webgl-ready) #worldFoodCanvas { display:none!important; }
+  .hero-visual:not(.webgl-ready) .hero-dish { opacity:1!important; visibility:visible!important; }
+  #worldStage:not(.webgl-ready) .world-dish { opacity:1!important; visibility:visible!important; }
+  .food-card { touch-action:pan-y; }
+  a[href^="#"] { scroll-margin-top: 84px; }
+</style>
+<script id="saffron-interaction-recovery-js">
+(function(){
+ 'use strict';
+ const reduced=()=>window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const $=(s,root=document)=>root.querySelector(s);
+ const scrollToTarget=(target)=>{
+   const el=typeof target==='string'?$(target):target;
+   if(!el)return false;
+   el.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'start'});
+   return true;
+ };
+ // Dynamic menu cards are rendered after page load, so use delegation rather than binding once.
+ document.addEventListener('pointermove',function(e){
+   if(reduced()||!window.matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+   const card=e.target.closest&&e.target.closest('.food-card');
+   if(!card)return;
+   const r=card.getBoundingClientRect(); if(!r.width||!r.height)return;
+   const x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+   card.style.setProperty('--tilt-x',((.5-y)*7).toFixed(2)+'deg');
+   card.style.setProperty('--tilt-y',((x-.5)*9).toFixed(2)+'deg');
+ },{passive:true});
+ document.addEventListener('pointerout',function(e){
+   const card=e.target.closest&&e.target.closest('.food-card');
+   if(card&&(!e.relatedTarget||!card.contains(e.relatedTarget))){
+     card.style.setProperty('--tilt-x','0deg');card.style.setProperty('--tilt-y','0deg');
+   }
+ },{passive:true});
+ // Guarantee in-page navigation and close the mobile nav after a section is selected.
+ document.addEventListener('click',function(e){
+   const link=e.target.closest&&e.target.closest('a[href^="#"]');
+   if(!link)return;
+   const href=link.getAttribute('href');
+   if(!href||href==='#')return;
+   const target=$(href);
+   if(target){
+     e.preventDefault();
+     scrollToTarget(target);
+     if(history.replaceState)history.replaceState(null,'',href);
+     const nav=$('#mainNav'),toggle=$('#mobileMenu');
+     if(nav)nav.classList.remove('open');
+     if(toggle)toggle.setAttribute('aria-expanded','false');
+   }
+ });
+ // Reveal sections even if IntersectionObserver is unavailable or initialization ran late.
+ const reveal=()=>document.querySelectorAll('.reveal:not(.visible)').forEach(el=>{
+   const r=el.getBoundingClientRect();
+   if(r.top<window.innerHeight*.96&&r.bottom>0)el.classList.add('visible');
+ });
+ if('IntersectionObserver' in window){
+   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+     if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}
+   }),{threshold:.05,rootMargin:'0px 0px 70px 0px'});
+   document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+ }else{
+   document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
+ }
+ let queued=false;
+ const onScroll=()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;reveal();});};
+ window.addEventListener('scroll',onScroll,{passive:true});
+ window.addEventListener('resize',reveal,{passive:true});
+ // If WebGL is blocked or the 3D scene fails, never leave the hero/experience visually empty.
+ window.addEventListener('error',function(e){
+   const src=e.target;
+   if(src&&src.id==='heroFoodCanvas'){const hero=$('#heroVisual');if(hero)hero.classList.remove('webgl-ready');}
+   if(src&&src.id==='worldFoodCanvas'){const stage=$('#worldStage');if(stage)stage.classList.remove('webgl-ready');}
+ },true);
+ const fallback3d=()=>{
+   const hero=$('#heroVisual'),heroCanvas=$('#heroFoodCanvas');
+   if(heroCanvas&&!window.THREE&&hero)hero.classList.remove('webgl-ready');
+   const stage=$('#worldStage'),worldCanvas=$('#worldFoodCanvas');
+   if(worldCanvas&&!window.THREE&&stage)stage.classList.remove('webgl-ready');
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{reveal();fallback3d();});
+ else{reveal();fallback3d();}
+})();
+</script>
+
 </body></html>
