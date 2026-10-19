@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10110d">
+  <title>SAFFRON TABLE | بوابة الدخول</title>
+  <style>
+    :root{color-scheme:dark;--bg:#10110d;--panel:#191a14;--line:#34362a;--text:#f4f1e7;--muted:#b7b7a8;--accent:#d8f36a}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0%,#343923 0%,transparent 50%),var(--bg);color:var(--text);font-family:Arial,"Segoe UI",sans-serif;display:grid;place-items:center;padding:28px}
+    main{width:min(100%,1000px);margin:auto}
+    .eyebrow{color:var(--accent);letter-spacing:.18em;font-size:.78rem;font-weight:700;text-align:center}
+    h1{font-size:clamp(2.3rem,6vw,4.8rem);line-height:1.05;text-align:center;margin:16px 0 12px;letter-spacing:-.04em}
+    .intro{color:var(--muted);text-align:center;font-size:1.05rem;line-height:1.9;max-width:620px;margin:0 auto 38px}
+    .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .card{background:linear-gradient(155deg,#202219,#151610);border:1px solid var(--line);border-radius:22px;padding:26px;display:flex;flex-direction:column;min-height:245px;transition:transform .2s,border-color .2s}
+    .card:hover{transform:translateY(-4px);border-color:var(--accent)}
+    .num{color:var(--accent);font-size:.82rem;letter-spacing:.14em}
+    h2{font-size:1.45rem;margin:24px 0 10px}
+    p{color:var(--muted);line-height:1.8;margin:0 0 24px;flex:1}
+    a{display:flex;justify-content:center;align-items:center;text-decoration:none;background:var(--accent);color:#17190e;font-weight:800;padding:14px 16px;border-radius:12px;min-height:48px}
+    a:focus-visible{outline:3px solid white;outline-offset:4px}
+    .admin a{background:transparent;border:1px solid #73765d;color:var(--text)}
+    footer{text-align:center;color:#858777;font-size:.82rem;margin-top:28px}
+    @media(max-width:760px){.cards{grid-template-columns:1fr}.card{min-height:unset}.intro{margin-bottom:26px}h2{margin-top:16px}body{padding:24px 16px}}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">SAFFRON TABLE · OFFICIAL PORTAL</div>
+    <h1>كل حاجة في <span style="color:var(--accent)">مكان واحد.</span></h1>
+    <p class="intro">اختار المكان اللي عايز تروحه. لينك واحد للوصول للموقع وحساب الزبون ولوحة الأدمن، مع بقاء كل صلاحية محمية لوحدها.</p>
+    <section class="cards" aria-label="اختيارات الدخول">
+      <article class="card">
+        <div class="num">01 / WEBSITE</div>
+        <h2>الموقع الرئيسي</h2>
+        <p>استكشف المنيو، وشوف تجربة المطعم، وابدأ طلبك.</p>
+        <a href="/">افتح الموقع</a>
+      </article>
+      <article class="card">
+        <div class="num">02 / CUSTOMER</div>
+        <h2>حساب الزبون</h2>
+        <p>سجّل حساب جديد أو ادخل لمتابعة طلباتك وحجوزاتك.</p>
+        <a href="/customer.html">دخول الزبائن</a>
+      </article>
+      <article class="card admin">
+        <div class="num">03 / ADMIN</div>
+        <h2>لوحة الأدمن</h2>
+        <p>إدارة الطلبات والحجوزات وحسابات الزبائن. الدخول للأدمن المصرّح له فقط.</p>
+        <a href="/admin.html">دخول الأدمن</a>
+      </article>
+    </section>
+    <footer>الدخول للوحة الأدمن محمي بتسجيل الدخول والتحقق من الصلاحيات.</footer>
+  </main>
+</body>
+</html>
