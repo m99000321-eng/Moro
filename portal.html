@@ -13,6 +13,9 @@
     .eyebrow{color:var(--accent);letter-spacing:.18em;font-size:.78rem;font-weight:700;text-align:center}
     h1{font-size:clamp(2.3rem,6vw,4.8rem);line-height:1.05;text-align:center;margin:16px 0 12px;letter-spacing:-.04em}
     .intro{color:var(--muted);text-align:center;font-size:1.05rem;line-height:1.9;max-width:620px;margin:0 auto 38px}
+
+    .scene3d{height:150px;width:190px;margin:0 auto 8px;position:relative;display:grid;place-items:center;perspective:800px;isolation:isolate}.core{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;position:relative;z-index:2;color:#17190e;font:700 34px Georgia,serif;background:radial-gradient(circle at 30% 23%,#fffbd7 0,#eaff94 17%,#d8f36a 48%,#71872c 100%);box-shadow:0 0 36px #d8f36a55,inset -9px -10px 18px #34411377;transform:translateZ(30px);animation:portalFloat 4s ease-in-out infinite}.orbit{position:absolute;width:156px;height:72px;border:1px solid #d8f36aaa;border-radius:50%;transform-style:preserve-3d;box-shadow:0 0 16px #d8f36a18}.orbit-a{transform:rotateX(66deg) rotateZ(-22deg);animation:portalSpin 9s linear infinite}.orbit-b{width:126px;height:102px;border-color:#a4b97d;transform:rotateY(68deg) rotateX(18deg);animation:portalSpin 12s linear infinite reverse}.spark{position:absolute;width:8px;height:8px;border-radius:50%;background:#d8f36a;box-shadow:0 0 18px #d8f36a;top:18px;right:26px;animation:portalSpark 3.2s ease-in-out infinite}.spark-b{width:6px;height:6px;top:auto;right:auto;bottom:20px;left:25px;background:#e7a87c;box-shadow:0 0 14px #e7a87c;animation-delay:-1.4s}@keyframes portalFloat{0%,100%{transform:translateY(0) translateZ(30px)}50%{transform:translateY(-8px) translateZ(40px)}}@keyframes portalSpin{from{rotate:0deg}to{rotate:360deg}}@keyframes portalSpark{0%,100%{translate:0 0;opacity:.65}50%{translate:9px -10px;opacity:1}}@media(prefers-reduced-motion:reduce){.scene3d *, .scene3d{animation:none!important;transition:none!important}}
+
     .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
     .card{background:linear-gradient(155deg,#202219,#151610);border:1px solid var(--line);border-radius:22px;padding:26px;display:flex;flex-direction:column;min-height:245px;transition:transform .2s,border-color .2s}
     .card:hover{transform:translateY(-4px);border-color:var(--accent)}
@@ -28,6 +31,7 @@
 </head>
 <body>
   <main>
+    <div class="scene3d" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="core">S.</div><i class="spark"></i><i class="spark spark-b"></i></div>
     <div class="eyebrow">SAFFRON TABLE · OFFICIAL PORTAL</div>
     <h1>كل حاجة في <span style="color:var(--accent)">مكان واحد.</span></h1>
     <p class="intro">اختار المكان اللي عايز تروحه. لينك واحد للوصول للموقع وحساب الزبون ولوحة الأدمن، مع بقاء كل صلاحية محمية لوحدها.</p>
