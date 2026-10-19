@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080910">
+<title>Saffron Table — Staff Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#080910;--panel:#11131e;--line:#2a2d3c;--lime:#d5ff00;--text:#f6f6ee;--muted:#a4a7b9;--orange:#ff684d;--purple:#bd90ff}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 75% -5%,#50307a36,transparent 37%),var(--bg);color:var(--text);font:14px/1.5 "DM Sans",Arial,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}a{color:var(--lime)}.shell{width:min(1200px,calc(100% - 40px));margin:auto}
+.topbar{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff1b;gap:12px}
+.brand{display:flex;align-items:center;gap:11px}.mark{width:40px;height:40px;border:1px solid var(--lime);border-radius:50%;display:grid;place-items:center;color:var(--lime);font:26px "Playfair Display",serif}.brand strong{font:600 16px "Playfair Display",serif;letter-spacing:.06em}.brand small{display:block;font-size:9px;letter-spacing:.2em;color:var(--lime);margin-top:2px}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid #ffffff2b;background:#151722;color:var(--text);padding:10px 14px;border-radius:4px;font-weight:700}.button.primary{background:var(--lime);border-color:var(--lime);color:#090a11}.button:disabled{opacity:.55;cursor:wait}
+.hero{padding:45px 0 28px;display:flex;align-items:end;justify-content:space-between;gap:20px}.eyebrow{color:var(--lime);font-size:10px;font-weight:800;letter-spacing:.2em}.hero h1{font:500 clamp(35px,5vw,62px)/1 "Playfair Display",serif;letter-spacing:-.045em;margin:12px 0 9px}.hero h1 em{color:var(--lime);font-style:normal}.muted{color:var(--muted)}.hero p{margin:0;max-width:540px}
+.login-wrap{width:min(440px,100%);margin:48px auto;background:linear-gradient(150deg,#171a28,#10121b);border:1px solid #ffffff20;padding:clamp(22px,5vw,38px);position:relative}.login-wrap:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--lime),var(--purple),var(--orange))}.login-wrap h2{font:500 30px "Playfair Display",serif;margin:0 0 8px}.field{display:grid;gap:7px;margin:17px 0}.field label{font-size:11px;font-weight:700;color:#d4d6e1}.field input,.field select{width:100%;min-height:44px;background:#090b13;border:1px solid #35384a;color:var(--text);padding:11px 12px;border-radius:3px;outline:none}.field input:focus,.field select:focus{border-color:var(--lime);box-shadow:0 0 0 3px #d5ff0018}.note{font-size:11px;line-height:1.7;color:var(--muted)}.error{color:#ff927c;font-size:12px;white-space:pre-wrap}.statusline{margin:15px 0 0;font-size:12px;white-space:pre-wrap}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:22px 0}.metric{padding:19px;background:#11131d;border:1px solid var(--line)}.metric label{font-size:10px;color:var(--muted);letter-spacing:.09em;text-transform:uppercase}.metric strong{display:block;font:600 32px "Playfair Display",serif;margin-top:8px;color:var(--lime)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:18px}.tab{background:transparent;color:#c1c3d0;border:1px solid var(--line);padding:10px 15px;border-radius:3px}.tab.active{background:var(--lime);color:#080910;border-color:var(--lime);font-weight:800}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:12px 0 16px}.toolbar h2{font:500 27px "Playfair Display",serif;margin:0}.list{display:grid;gap:12px}.record{background:linear-gradient(145deg,#141724,#10121b);border:1px solid #292c3b;padding:18px;display:grid;gap:12px;min-width:0}.record-head{display:flex;justify-content:space-between;align-items:start;gap:12px;flex-wrap:wrap}.record-head h3{font-size:15px;margin:0 0 4px}.record-ref{color:var(--lime);font-weight:800;font-size:11px;letter-spacing:.09em}.badge{padding:5px 8px;border:1px solid #ffffff24;border-radius:3px;color:var(--purple);font-size:10px;font-weight:800}.details{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.detail{min-width:0;color:var(--muted);font-size:11px;overflow-wrap:anywhere}.detail strong{display:block;color:var(--text);font-size:12px;font-weight:600;margin-top:3px;white-space:pre-wrap}.items{font-size:12px;color:#d7d8e2;border-top:1px solid #ffffff14;padding-top:10px}.items p{margin:4px 0}.record-controls{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.record-controls select{min-height:39px;background:#080a12;border:1px solid #393c4c;color:white;padding:8px 10px;max-width:100%}.price{color:var(--lime);font-size:20px;font-weight:800}.panel[hidden],.login-wrap[hidden],#app[hidden]{display:none!important}.empty{padding:38px 20px;text-align:center;color:var(--muted);border:1px dashed #343748}.error-box{padding:12px 14px;background:#ff624d12;border:1px solid #ff624d4d;color:#ffaf9f;margin:12px 0}.success-box{padding:12px 14px;background:#d5ff0011;border:1px solid #d5ff0043;color:#e4ff9d;margin:12px 0}
+.footer{border-top:1px solid #ffffff18;margin-top:48px;padding:22px 0;color:#85899b;font-size:10px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+@media(max-width:760px){.shell{width:calc(100% - 28px)}.topbar{height:70px}.brand strong{font-size:13px}.mark{width:35px;height:35px}.hero{padding-top:30px;align-items:start;flex-direction:column}.metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.metric{padding:14px}.metric strong{font-size:27px}.details{grid-template-columns:repeat(2,minmax(0,1fr))}.record{padding:14px}.toolbar{align-items:start}.toolbar h2{font-size:23px}}
+@media(max-width:390px){.button{padding:9px 10px;font-size:12px}.details{grid-template-columns:1fr 1fr}.record-head h3{font-size:13px}.metric label{font-size:8px}.record-controls select{width:100%}}
+</style>
+</head>
+<body>
+<header class="topbar shell"><a class="brand" href="/" style="text-decoration:none;color:inherit"><span class="mark">S.</span><span><strong>SAFFRON TABLE</strong><small>STAFF CONSOLE</small></span></a><button class="button" id="logoutBtn" hidden>Sign out</button></header>
+<main class="shell">
+<section id="login" class="login-wrap">
+<div class="eyebrow">STAFF ACCESS · SECURE LOGIN</div><h2>Welcome back.</h2><p class="muted">Sign in with a restaurant staff account to manage incoming orders and reservations.</p>
+<form id="loginForm"><div class="field"><label for="email">Staff email</label><input id="email" name="email" type="email" required autocomplete="username" maxlength="254"></div><div class="field"><label for="password">Password</label><input id="password" name="password" type="password" required autocomplete="current-password" maxlength="256"></div><button class="button primary" style="width:100%;margin-top:7px" type="submit" id="loginBtn">Sign in securely ↗</button><div class="statusline" id="loginMessage" role="status"></div></form>
+<p class="note">Staff accounts are created by the project owner. Public visitors cannot read customer orders or reservations.</p>
+</section>
+<section id="app" hidden>
+<div class="hero"><div><div class="eyebrow">LIVE OPERATIONS · SAFFRON TABLE</div><h1>Every order.<br><em>One place.</em></h1><p class="muted">Review requests, update order progress and manage table reservations. Changes are stored in the production database.</p></div><button class="button" id="refreshBtn">↻ Refresh</button></div>
+<div class="metrics"><div class="metric"><label>Orders today</label><strong id="mOrders">—</strong></div><div class="metric"><label>Awaiting action</label><strong id="mPending">—</strong></div><div class="metric"><label>Reservations today</label><strong id="mReservations">—</strong></div><div class="metric"><label>Newsletter leads</label><strong id="mSubscribers">—</strong></div></div>
+<div id="globalMessage"></div>
+<div class="tabs" role="tablist"><button class="tab active" data-tab="orders">Orders</button><button class="tab" data-tab="reservations">Reservations</button><button class="tab" data-tab="newsletter">Newsletter</button></div>
+<section class="panel" data-panel="orders"><div class="toolbar"><h2>Incoming orders</h2><span class="muted" id="ordersMeta"></span></div><div class="list" id="ordersList"><div class="empty">Loading orders…</div></div></section>
+<section class="panel" data-panel="reservations" hidden><div class="toolbar"><h2>Table reservations</h2><span class="muted" id="reservationsMeta"></span></div><div class="list" id="reservationsList"><div class="empty">Loading reservations…</div></div></section>
+<section class="panel" data-panel="newsletter" hidden><div class="toolbar"><h2>Newsletter leads</h2><span class="muted" id="newsletterMeta"></span></div><div class="list" id="newsletterList"><div class="empty">Loading contacts…</div></div></section>
+<p class="note">Payment is currently cash on delivery or pay-at-pickup. Newsletter entries are pending confirmation until an email service is connected. Keep staff credentials private and only enable trusted staff accounts.</p>
+</section>
+</main>
+<footer class="footer shell"><span>SAFFRON TABLE · INTERNAL STAFF TOOL</span><a href="/">Return to restaurant website</a></footer>
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.0";
+const SUPABASE_URL="https://erosjbwpjcgtoocltvqq.supabase.co";
+const SUPABASE_KEY="sb_publishable_3oY0Yj_-91ioWjoACmf8CA_6vV920cC";
+const db=createClient(SUPABASE_URL,SUPABASE_KEY);
+const $=(s)=>document.querySelector(s);
+const states={pending:"Pending",confirmed:"Confirmed",preparing:"Preparing",ready:"Ready for pickup",out_for_delivery:"Out for delivery",completed:"Completed",cancelled:"Cancelled"};
+const reservationStates={pending:"Pending",confirmed:"Confirmed",cancelled:"Cancelled",completed:"Completed"};
+let currentUser=null,staff=null,orders=[],reservations=[],subscribers=[],refreshTimer=null;
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function money(v){return new Intl.NumberFormat("en-EG",{style:"currency",currency:"EGP",maximumFractionDigits:0}).format(Number(v)||0)}
+function localDate(d=new Date()){const x=new Date(d);return x.toLocaleDateString("en-CA",{timeZone:"Africa/Cairo"});}
+function message(text,type="error"){const el=$("#globalMessage");el.className=type==="error"?"error-box":"success-box";el.textContent=text;}
+function clearMessage(){$("#globalMessage").className="";$("#globalMessage").textContent="";}
+function showLogin(msg=""){ $("#login").hidden=false;$("#app").hidden=true;$("#logoutBtn").hidden=true;$("#loginMessage").textContent=msg; }
+function showApp(){ $("#login").hidden=true;$("#app").hidden=false;$("#logoutBtn").hidden=false; }
+async function guardStaff(user){
+ const {data,error}=await db.from("restaurant_staff").select("user_id,display_name").eq("user_id",user.id).maybeSingle();
+ if(error)throw error;
+ if(!data)throw new Error("This account is signed in but is not enabled as restaurant staff yet. The project owner must add this user ID to public.restaurant_staff in the Supabase SQL Editor.");
+ return data;
+}
+async function loadAll(){
+ if(!currentUser||!staff)return;
+ clearMessage();
+ const results=await Promise.all([
+  db.from("restaurant_orders").select("*,restaurant_order_items(*)").order("created_at",{ascending:false}).limit(100),
+  db.from("restaurant_reservations").select("*").order("reservation_date",{ascending:true}).order("reservation_time",{ascending:true}).limit(100),
+  db.from("restaurant_newsletter_subscribers").select("email,status,consented_at,created_at").order("created_at",{ascending:false}).limit(200)
+ ]);
+ const err=results.find(x=>x.error)?.error;
+ if(err){message("Could not load restaurant records: "+err.message);return;}
+ orders=results[0].data||[];reservations=results[1].data||[];subscribers=results[2].data||[];
+ const today=localDate();
+ $("#mOrders").textContent=orders.filter(o=>String(o.created_at).slice(0,10)===today).length;
+ $("#mPending").textContent=orders.filter(o=>["pending","confirmed","preparing"].includes(o.status)).length;
+ $("#mReservations").textContent=reservations.filter(r=>r.reservation_date===today&&r.status!=="cancelled").length;
+ $("#mSubscribers").textContent=subscribers.length;
+ renderOrders();renderReservations();renderSubscribers();
+}
+function statusSelect(record,choices,kind){
+ const status=record.status;
+ return '<label class="muted" for="'+kind+'-'+esc(record.id)+'">Status</label> <select id="'+kind+'-'+esc(record.id)+'" data-status-kind="'+kind+'" data-id="'+esc(record.id)+'">'+Object.entries(choices).map(([key,label])=>'<option value="'+key+'"'+(key===status?' selected':'')+'>'+label+'</option>').join("")+'</select>';
+}
+function renderOrders(){
+ $("#ordersMeta").textContent=orders.length+" recent";
+ $("#ordersList").innerHTML=orders.length?orders.map(o=>{
+  const items=Array.isArray(o.restaurant_order_items)?o.restaurant_order_items:[];
+  const itemHtml=items.map(i=>'<p>'+esc(i.quantity)+' × '+esc(i.name_en)+' — '+money(i.line_total_egp)+'</p>').join("");
+  const date=new Date(o.created_at).toLocaleString("en-EG",{dateStyle:"medium",timeStyle:"short",timeZone:"Africa/Cairo"});
+  return '<article class="record"><div class="record-head"><div><div class="record-ref">'+esc(o.reference)+'</div><h3>'+esc(o.customer_name)+'</h3><div class="muted">'+esc(date)+' · '+esc(o.fulfillment_type==="delivery"?"Delivery":"Pickup")+'</div></div><div class="price">'+money(o.total_egp)+'</div></div><div class="details"><div class="detail">Phone<strong><a href="tel:'+esc(o.phone)+'">'+esc(o.phone)+'</a></strong></div><div class="detail">Payment<strong>'+esc(o.payment_method==="cash_on_delivery"?"Cash on delivery":"Pay at pickup")+' · '+esc(o.payment_status)+'</strong></div><div class="detail">Address<strong>'+esc(o.fulfillment_type==="delivery"?o.delivery_address:"Pickup at restaurant")+'</strong></div></div><div class="items">'+itemHtml+(o.notes?'<p>Notes: '+esc(o.notes)+'</p>':"")+'</div><div class="record-controls">'+statusSelect(o,states,"order")+'</div></article>';
+ }).join(""):'<div class="empty">No orders have arrived yet.</div>';
+}
+function renderReservations(){
+ $("#reservationsMeta").textContent=reservations.length+" recent";
+ $("#reservationsList").innerHTML=reservations.length?reservations.map(r=>{
+  return '<article class="record"><div class="record-head"><div><div class="record-ref">'+esc(r.reference)+'</div><h3>'+esc(r.customer_name)+' · '+esc(r.guest_count)+' guests</h3><div class="muted">'+esc(r.reservation_date)+' · '+esc(r.reservation_time)+'</div></div><span class="badge">'+esc(r.occasion||"Regular visit")+'</span></div><div class="details"><div class="detail">Phone<strong><a href="tel:'+esc(r.phone)+'">'+esc(r.phone)+'</a></strong></div><div class="detail">Requested at<strong>'+esc(new Date(r.created_at).toLocaleString("en-EG",{dateStyle:"medium",timeStyle:"short",timeZone:"Africa/Cairo"}))+'</strong></div><div class="detail">Notes<strong>'+esc(r.notes||"—")+'</strong></div></div><div class="record-controls">'+statusSelect(r,reservationStates,"reservation")+'</div></article>';
+ }).join(""):'<div class="empty">No reservations have arrived yet.</div>';
+}
+function renderSubscribers(){
+ $("#newsletterMeta").textContent=subscribers.length+" records";
+ $("#newsletterList").innerHTML=subscribers.length?subscribers.map(s=>'<article class="record"><div class="record-head"><div><h3>'+esc(s.email)+'</h3><div class="muted">Saved '+esc(new Date(s.created_at).toLocaleString("en-EG",{dateStyle:"medium",timeStyle:"short",timeZone:"Africa/Cairo"}))+'</div></div><span class="badge">'+esc(s.status.replaceAll("_"," "))+'</span></div></article>').join(""):'<div class="empty">No email leads yet.</div>';
+}
+document.addEventListener("change",async e=>{
+ const select=e.target.closest("select[data-status-kind]");if(!select)return;
+ const kind=select.dataset.statusKind,id=select.dataset.id,newStatus=select.value;
+ select.disabled=true;
+ const table=kind==="order"?"restaurant_orders":"restaurant_reservations";
+ const {error}=await db.from(table).update({status:newStatus,updated_at:new Date().toISOString()}).eq("id",id);
+ select.disabled=false;
+ if(error){message("Status update failed: "+error.message);return;}
+ message("Status updated.", "success");await loadAll();
+});
+document.querySelectorAll("[data-tab]").forEach(btn=>btn.addEventListener("click",()=>{
+ document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("active",b===btn));
+ document.querySelectorAll("[data-panel]").forEach(p=>p.hidden=p.dataset.panel!==btn.dataset.tab);
+}));
+$("#loginForm").addEventListener("submit",async e=>{
+ e.preventDefault();const btn=$("#loginBtn");btn.disabled=true;$("#loginMessage").textContent="Signing in…";
+ try{
+  const {data,error}=await db.auth.signInWithPassword({email:$("#email").value.trim(),password:$("#password").value});
+  if(error)throw error;
+  currentUser=data.user;staff=await guardStaff(currentUser);showApp();await loadAll();
+  if(refreshTimer)clearInterval(refreshTimer);refreshTimer=setInterval(()=>loadAll(),30000);
+ }catch(error){$("#loginMessage").textContent=error.message||"Sign-in failed.";}
+ finally{btn.disabled=false;}
+});
+$("#logoutBtn").addEventListener("click",async()=>{if(refreshTimer)clearInterval(refreshTimer);refreshTimer=null;await db.auth.signOut();currentUser=null;staff=null;showLogin("Signed out.");});
+$("#refreshBtn").addEventListener("click",loadAll);
+const {data:sessionData}=await db.auth.getSession();
+if(sessionData.session){
+ currentUser=sessionData.session.user;
+ try{staff=await guardStaff(currentUser);showApp();await loadAll();refreshTimer=setInterval(()=>loadAll(),30000);}
+ catch(e){await db.auth.signOut();currentUser=null;staff=null;showLogin(e.message);}
+}
+</script>
+</body></html>
