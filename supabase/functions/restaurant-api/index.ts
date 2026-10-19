@@ -59,19 +59,21 @@ async function api(path: string, init: RequestInit = {}): Promise<unknown> {
   }
   return data;
 }
-async function requireCustomer(req: Request): Promise<{userId:string}|{error:string;status:number}> {
+async function authenticatedUser(req: Request): Promise<{id:string;email?:string}|null> {
   const authorization = req.headers.get("authorization") ?? "";
   const match = authorization.match(/^Bearer\s+(.+)$/i);
-  if (!match) return { error: "AUTH_REQUIRED", status: 401 };
-  const publishableKey = Deno.env.get("SUPABASE_ANON_KEY")
-    ?? Deno.env.get("SUPABASE_PUBLISHABLE_KEY")
-    ?? SERVICE_KEY;
+  if (!match) return null;
+  const apiKey = Deno.env.get("SUPABASE_ANON_KEY") ?? Deno.env.get("SUPABASE_PUBLISHABLE_KEY") ?? SERVICE_KEY;
   const response = await fetch(SUPABASE_URL + "/auth/v1/user", {
-    headers: { "apikey": publishableKey, "Authorization": "Bearer " + match[1] }
+    headers: { "apikey": apiKey, "Authorization": "Bearer " + match[1] }
   });
-  if (!response.ok) return { error: "AUTH_REQUIRED", status: 401 };
+  if (!response.ok) return null;
   const user = await response.json();
-  if (!user || typeof user.id !== "string") return { error: "AUTH_REQUIRED", status: 401 };
+  return user && typeof user.id === "string" ? {id:user.id,email:typeof user.email==="string"?user.email:undefined} : null;
+}
+async function requireCustomer(req: Request): Promise<{userId:string}|{error:string;status:number}> {
+  const user = await authenticatedUser(req);
+  if (!user) return { error: "AUTH_REQUIRED", status: 401 };
   const profile = await api("restaurant_customers?user_id=eq." + encodeURIComponent(user.id) + "&select=user_id,status");
   if (!Array.isArray(profile) || !profile.length) return { error: "CUSTOMER_PROFILE_MISSING", status: 403 };
   if (profile[0].status !== "active") return { error: "CUSTOMER_SUSPENDED", status: 403 };
@@ -79,6 +81,53 @@ async function requireCustomer(req: Request): Promise<{userId:string}|{error:str
   if (Array.isArray(staff) && staff.length) return { error: "ADMIN_ACCOUNT_NOT_CUSTOMER", status: 403 };
   return { userId: user.id };
 }
+async function requireStaff(req: Request): Promise<{userId:string}|{error:string;status:number}> {
+  const user = await authenticatedUser(req);
+  if (!user) return { error: "AUTH_REQUIRED", status: 401 };
+  const staff = await api("restaurant_staff?user_id=eq." + encodeURIComponent(user.id) + "&select=user_id");
+  if (!Array.isArray(staff) || !staff.length) return { error: "ADMIN_REQUIRED", status: 403 };
+  return { userId: user.id };
+}
+async function staffAdminAction(action: string, body: Json, req: Request, origin: string | null): Promise<Response> {
+  const access = await requireStaff(req);
+  if ("error" in access) return respond(access.status, {ok:false,error:access.error}, origin);
+  if (action === "staff_list_customers") {
+    const rows = await api("restaurant_customers?select=user_id,email,display_name,phone,status,created_at,updated_at&order=created_at.desc&limit=500");
+    return respond(200,{ok:true,customers:rows},origin);
+  }
+  const target = text(body.user_id, 36);
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(target)) {
+    return respond(400,{ok:false,error:"INVALID_CUSTOMER_ID"},origin);
+  }
+  const staffTarget = await api("restaurant_staff?user_id=eq."+encodeURIComponent(target)+"&select=user_id");
+  if (Array.isArray(staffTarget) && staffTarget.length) return respond(403,{ok:false,error:"CANNOT_CHANGE_ADMIN"},origin);
+  if (target === access.userId) return respond(403,{ok:false,error:"CANNOT_CHANGE_SELF"},origin);
+  if (action === "staff_update_customer") {
+    const status = text(body.status,20);
+    if (!["active","suspended"].includes(status)) return respond(400,{ok:false,error:"INVALID_CUSTOMER_STATUS"},origin);
+    const result = await api("restaurant_customers?user_id=eq."+encodeURIComponent(target)+"&select=user_id,status,email,display_name",{
+      method:"PATCH",headers:{"Prefer":"return=representation"},
+      body:JSON.stringify({status,updated_at:new Date().toISOString()})
+    });
+    if (!Array.isArray(result) || !result.length) return respond(404,{ok:false,error:"CUSTOMER_NOT_FOUND"},origin);
+    return respond(200,{ok:true,customer:result[0]},origin);
+  }
+  if (action === "staff_delete_customer") {
+    const response = await fetch(SUPABASE_URL + "/auth/v1/admin/users/" + encodeURIComponent(target), {
+      method:"DELETE",
+      headers:{"apikey":SERVICE_KEY,"Authorization":"Bearer "+SERVICE_KEY,"Content-Type":"application/json"}
+    });
+    if (response.status === 404) return respond(404,{ok:false,error:"CUSTOMER_NOT_FOUND"},origin);
+    if (!response.ok) {
+      const detail = await response.text();
+      console.error("auth admin delete failed",response.status,detail);
+      return respond(500,{ok:false,error:"CUSTOMER_DELETE_FAILED"},origin);
+    }
+    return respond(200,{ok:true,deleted_user_id:target},origin);
+  }
+  return respond(400,{ok:false,error:"UNKNOWN_STAFF_ACTION"},origin);
+}
+
 async function rateAllowed(req: Request, action: string, limit: number, windowSeconds: number): Promise<boolean> {
   const ip = req.headers.get("cf-connecting-ip")
     ?? req.headers.get("x-real-ip")
