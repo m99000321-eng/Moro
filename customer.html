@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080910"><meta name="description" content="Your private Saffron Table account. Track restaurant orders and manage reservations.">
+<title>Your Table — Saffron Table</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#080910;--panel:#11131d;--line:#2c2f3f;--lime:#d5ff00;--orange:#ff674c;--purple:#b58cff;--text:#f6f6ed;--muted:#a7a9b9}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 80% -10%,#633b902b,transparent 35%),var(--bg);color:var(--text);font:14px/1.5 "DM Sans",Arial,sans-serif}button,input{font:inherit}button{cursor:pointer}.shell{width:min(1080px,calc(100% - 36px));margin:auto}.top{height:78px;border-bottom:1px solid #ffffff19;display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}.mark{width:38px;height:38px;border:1px solid var(--lime);border-radius:50%;display:grid;place-items:center;font:25px "Playfair Display",serif;color:var(--lime)}.brand strong{font:600 15px "Playfair Display",serif;letter-spacing:.05em}.brand small{display:block;font-size:8px;letter-spacing:.22em;color:var(--lime);margin-top:2px}.btn{border:1px solid #ffffff2a;background:#151722;color:var(--text);padding:11px 15px;font-size:11px;font-weight:800;border-radius:3px}.btn.primary{background:var(--lime);border-color:var(--lime);color:#080910}.btn.ghost{background:transparent}.btn:disabled{opacity:.5;cursor:wait}.hero{padding:46px 0 24px}.eyebrow{font-size:10px;font-weight:800;letter-spacing:.2em;color:var(--lime)}h1{font:500 clamp(38px,5.5vw,66px)/.99 "Playfair Display",serif;letter-spacing:-.06em;margin:13px 0}h1 em{font-style:normal;color:var(--lime)}p{color:var(--muted);line-height:1.8}.grid{display:grid;grid-template-columns:minmax(285px,.76fr) minmax(0,1.24fr);gap:22px;align-items:start}.card{background:linear-gradient(145deg,#171a27,#10121b);border:1px solid #ffffff1b;padding:clamp(20px,3vw,30px);position:relative}.card:before{content:"";position:absolute;left:0;top:0;right:0;height:2px;background:linear-gradient(90deg,var(--lime),var(--purple),var(--orange))}.tabs{display:flex;gap:7px;margin:22px 0 18px}.tab{flex:1;padding:10px 8px;background:#090b13;border:1px solid #ffffff18;color:#bbc0d0;font-weight:800;font-size:11px}.tab.active{background:var(--lime);color:#080910;border-color:var(--lime)}.field{display:grid;gap:7px;margin:14px 0}.field label{font-size:11px;font-weight:700;color:#d8d9e1}.field input{width:100%;min-height:45px;background:#090b13;border:1px solid #373a4c;color:var(--text);padding:11px 12px;outline:none;border-radius:3px}.field input:focus{border-color:var(--lime);box-shadow:0 0 0 3px #d5ff001a}.note{font-size:10px;line-height:1.7}.message{font-size:12px;margin-top:14px;white-space:pre-wrap;overflow-wrap:anywhere}.message.error{color:#ff9a8b}.message.good{color:#ddff8a}.account-head{display:flex;align-items:start;justify-content:space-between;gap:15px;flex-wrap:wrap}.account-head h2{font:500 29px "Playfair Display",serif;margin:0}.muted{color:var(--muted)}.pills{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.pill{border:1px solid #d5ff0044;color:#e5ff94;background:#d5ff000a;padding:7px 9px;font-size:10px;font-weight:800}.section-title{font:500 24px "Playfair Display",serif;margin:28px 0 13px}.records{display:grid;gap:11px}.record{border:1px solid #ffffff18;background:#0c0e17;padding:15px;display:grid;gap:8px}.record-top{display:flex;align-items:start;justify-content:space-between;gap:9px;flex-wrap:wrap}.reference{font-size:11px;letter-spacing:.12em;font-weight:800;color:var(--lime)}.amount{font-size:17px;font-weight:800;color:var(--lime)}.badge{font-size:10px;color:var(--purple);border:1px solid #b58cff55;padding:5px 8px;font-weight:800;text-transform:capitalize}.items{font-size:11px;color:#cdd0dc;line-height:1.8}.empty{padding:28px 16px;border:1px dashed #343747;text-align:center;color:var(--muted);font-size:12px}.private-note{border-left:2px solid var(--lime);padding:10px 14px;background:#d5ff0008;color:#b9bdca;font-size:11px;line-height:1.8;margin:17px 0}.hidden{display:none!important}.footer{border-top:1px solid #ffffff19;margin-top:50px;padding:22px 0;color:#8b8fa1;font-size:10px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.footer a{color:var(--lime);text-decoration:none}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.hero{padding-top:32px}.grid>.card:first-child{order:1}.grid>.card:last-child{order:2}}
+@media(max-width:430px){.shell{width:calc(100% - 24px)}.top{height:68px}.brand strong{font-size:12px}.mark{width:33px;height:33px}.top>.btn{padding:9px 10px}.hero{padding-bottom:15px}.card{padding:20px 16px}.account-head h2{font-size:24px}.record{padding:12px}}
+</style>
+</head>
+<body>
+<header class="top shell">
+<a class="brand" href="/" aria-label="Saffron Table home"><span class="mark">S.</span><span><strong>SAFFRON TABLE</strong><small>YOUR TABLE · YOUR ACCOUNT</small></span></a>
+<a href="/" class="btn ghost">← Restaurant home</a>
+</header>
+<main class="shell">
+<section class="hero"><div class="eyebrow">YOUR TABLE · MADE PERSONAL</div><h1>Your favourites.<br><em>Your orders.</em></h1><p>One customer account for your orders and reservations. Staff access is separate and assigned by the restaurant — there is no role selector.</p></section>
+<div class="grid">
+<section class="card" id="authCard">
+<div class="eyebrow">CUSTOMER ACCESS</div><h2 style="font:500 29px 'Playfair Display',serif;margin:8px 0">Welcome to your table.</h2><p style="font-size:12px;margin-top:0">Sign in, or create your customer account.</p>
+<div class="tabs"><button class="tab active" id="loginTab" type="button">Sign in</button><button class="tab" id="signupTab" type="button">Create account</button></div>
+<form id="authForm">
+<div class="field hidden" id="nameField"><label for="fullName">Full name</label><input id="fullName" autocomplete="name" maxlength="80"></div>
+<div class="field hidden" id="phoneField"><label for="phone">Phone number</label><input id="phone" type="tel" autocomplete="tel" maxlength="25"></div>
+<div class="field"><label for="email">Email address</label><input id="email" type="email" autocomplete="email" required maxlength="254"></div>
+<div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required minlength="8" maxlength="128"></div>
+<button class="btn primary" id="submitBtn" type="submit" style="width:100%;margin-top:6px">Sign in ↗</button>
+<div class="message" id="authMessage" role="status" aria-live="polite"></div>
+</form>
+<p class="note">By creating an account, you agree to use genuine contact details for order updates. Admin access is never granted from this form.</p>
+</section>
+<section class="card hidden" id="accountCard">
+<div class="account-head"><div><div class="eyebrow">CUSTOMER ACCOUNT</div><h2 id="welcomeName">Welcome back.</h2><p id="accountEmail" style="font-size:12px;margin:7px 0 0"></p></div><button class="btn" id="logoutBtn">Sign out</button></div>
+<div class="pills"><span class="pill">✓ CUSTOMER ROLE</span><span class="pill">🔒 PRIVATE ACCOUNT</span></div>
+<div class="private-note">Your account only displays your own orders and reservations. The restaurant's staff console is protected by a separate server-checked role.</div>
+<h3 class="section-title">Your orders</h3><div class="records" id="ordersList"><div class="empty">Loading your orders…</div></div>
+<h3 class="section-title">Your reservations</h3><div class="records" id="reservationsList"><div class="empty">Loading your reservations…</div></div>
+<a class="btn primary" href="/#menu" style="display:inline-block;margin-top:20px;text-decoration:none">Order something delicious ↗</a>
+</section>
+</div>
+</main>
+<footer class="footer shell"><span>SAFFRON TABLE · CUSTOMER SPACE</span><a href="/">Back to restaurant</a></footer>
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.0";
+const URL="https://erosjbwpjcgtoocltvqq.supabase.co";
+const KEY="sb_publishable_3oY0Yj_-91ioWjoACmf8CA_6vV920cC";
+const db=createClient(URL,KEY);
+const $=s=>document.querySelector(s);
+let mode="login",currentUser=null,profile=null;
+function setMessage(msg,type="error"){$("#authMessage").className="message "+type;$("#authMessage").textContent=msg;}
+function setMode(next){
+ mode=next;const signup=mode==="signup";
+ $("#loginTab").classList.toggle("active",!signup);$("#signupTab").classList.toggle("active",signup);
+ $("#nameField").classList.toggle("hidden",!signup);$("#phoneField").classList.toggle("hidden",!signup);
+ $("#fullName").required=signup;$("#phone").required=signup;
+ $("#password").autocomplete=signup?"new-password":"current-password";
+ $("#submitBtn").textContent=signup?"Create customer account ↗":"Sign in ↗";
+ $("#authMessage").textContent="";
+}
+$("#loginTab").addEventListener("click",()=>setMode("login"));
+$("#signupTab").addEventListener("click",()=>setMode("signup"));
+function staffRedirect(){location.replace("/admin.html"+(new URLSearchParams(location.search).has("reason")?"?reason=staff":""))}
+function customerNext(){
+ const params=new URLSearchParams(location.search),next=params.get("next");
+ if(next==="checkout"||next==="reservation"){location.replace("/?resume="+encodeURIComponent(next)+(next==="reservation"?"#reserve":"#menu"));return true;}
+ return false;
+}
+async function verifyCustomer(user){
+ const {data:staff,error:staffError}=await db.from("restaurant_staff").select("user_id").eq("user_id",user.id).maybeSingle();
+ if(!staffError&&staff){staffRedirect();return false;}
+ const {data,error}=await db.from("restaurant_customers").select("user_id,email,display_name,phone,status").eq("user_id",user.id).maybeSingle();
+ if(error)throw error;
+ if(!data)throw new Error("Your customer profile is still being created. Please sign out and sign in again in a moment.");
+ if(data.status!=="active"){await db.auth.signOut();throw new Error("This customer account has been suspended. Contact the restaurant team for help.");}
+ profile=data;currentUser=user;return true;
+}
+function money(v){return new Intl.NumberFormat("en-EG",{style:"currency",currency:"EGP",maximumFractionDigits:0}).format(Number(v)||0);}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+async function loadAccount(){
+ $("#authCard").classList.add("hidden");$("#accountCard").classList.remove("hidden");
+ $("#welcomeName").textContent="Welcome, "+(profile.display_name||currentUser.email||"there")+".";
+ $("#accountEmail").textContent=currentUser.email||profile.email||"";
+ const [o,r]=await Promise.all([
+  db.from("restaurant_orders").select("id,reference,fulfillment_type,status,subtotal_egp,delivery_fee_egp,total_egp,created_at,restaurant_order_items(product_id,name_en,name_ar,quantity,line_total_egp)").eq("customer_id",currentUser.id).order("created_at",{ascending:false}).limit(50),
+  db.from("restaurant_reservations").select("id,reference,reservation_date,reservation_time,guest_count,occasion,notes,status,created_at").eq("customer_id",currentUser.id).order("reservation_date",{ascending:false}).limit(50)
+ ]);
+ if(o.error)$("#ordersList").innerHTML='<div class="empty">Could not load orders. '+esc(o.error.message)+'</div>';
+ else $("#ordersList").innerHTML=o.data.length?o.data.map(order=>{
+  const when=new Date(order.created_at).toLocaleString("en-EG",{dateStyle:"medium",timeStyle:"short",timeZone:"Africa/Cairo"});
+  const items=(order.restaurant_order_items||[]).map(i=>'<p>'+esc(i.quantity)+' × '+esc(i.name_en)+' — '+money(i.line_total_egp)+'</p>').join("");
+  return '<article class="record"><div class="record-top"><div><div class="reference">'+esc(order.reference)+'</div><div class="muted" style="font-size:10px;margin-top:4px">'+esc(when)+' · '+esc(order.fulfillment_type==="delivery"?"Delivery":"Pickup")+'</div></div><span class="badge">'+esc(order.status.replaceAll("_"," "))+'</span></div><div class="items">'+items+'</div><div class="record-top"><span class="muted">Total</span><span class="amount">'+money(order.total_egp)+'</span></div></article>';
+ }).join(""):'<div class="empty">No orders yet. Your next favourite is waiting in the menu.</div>';
+ if(r.error)$("#reservationsList").innerHTML='<div class="empty">Could not load reservations. '+esc(r.error.message)+'</div>';
+ else $("#reservationsList").innerHTML=r.data.length?r.data.map(res=>{
+  return '<article class="record"><div class="record-top"><div><div class="reference">'+esc(res.reference)+'</div><div style="font-weight:700;margin-top:4px">'+esc(res.reservation_date)+' · '+esc(res.reservation_time)+'</div><div class="muted" style="font-size:10px">'+esc(res.guest_count)+' guests'+(res.occasion?' · '+esc(res.occasion):"")+'</div></div><span class="badge">'+esc(res.status)+'</span></div>'+(res.notes?'<div class="items">'+esc(res.notes)+'</div>':"")+'</article>';
+ }).join(""):'<div class="empty">No reservations yet. Book a table from the restaurant homepage.</div>';
+}
+$("#authForm").addEventListener("submit",async e=>{
+ e.preventDefault();const btn=$("#submitBtn");btn.disabled=true;setMessage(mode==="signup"?"Creating your account…":"Signing in…","good");
+ try{
+  if(mode==="signup"){
+   const {data,error}=await db.auth.signUp({
+    email:$("#email").value.trim().toLowerCase(),password:$("#password").value,
+    options:{emailRedirectTo:location.origin+"/customer.html",data:{display_name:$("#fullName").value.trim(),phone:$("#phone").value.trim()}}
+   });
+   if(error)throw error;
+   if(!data.session){setMessage("Account created. Check your email to confirm it, then return here to sign in.","good");return;}
+   const ok=await verifyCustomer(data.user);if(!ok)return;
+  }else{
+   const {data,error}=await db.auth.signInWithPassword({email:$("#email").value.trim().toLowerCase(),password:$("#password").value});
+   if(error)throw error;
+   const ok=await verifyCustomer(data.user);if(!ok)return;
+  }
+  if(customerNext())return;
+  await loadAccount();
+ }catch(err){setMessage(err?.message||"Could not complete authentication.");}
+ finally{btn.disabled=false;}
+});
+$("#logoutBtn").addEventListener("click",async()=>{await db.auth.signOut();currentUser=null;profile=null;$("#accountCard").classList.add("hidden");$("#authCard").classList.remove("hidden");setMode("login");});
+const {data:{session}}=await db.auth.getSession();
+if(session){
+ try{const ok=await verifyCustomer(session.user);if(ok){if(!customerNext())await loadAccount();}}
+ catch(err){$("#authCard").classList.remove("hidden");setMessage(err.message);}
+}
+</script>
+</body>
+</html>
