@@ -470,6 +470,25 @@ footer a:hover,.footer a:hover{color:#d5ff65}
 @media(max-width:760px){.header{background:#080a08f5}.nav{background:#0d100b;border:1px solid #303729}.hero:before{background:linear-gradient(180deg,#080a08a8,#080a08ee 85%),url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80') center/cover}.trust-inner{background:#0d100b}.trust-item{border-color:#2b3124}.section{padding-block:68px}.menu-tools{align-items:stretch}.search{min-width:0}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
+<style id="saffron-motion-fix">
+/* Reliable motion layer: placed last so earlier theme rules cannot cancel it. */
+@keyframes st-orbit-live{from{transform:rotateX(67deg) rotateZ(-17deg)}to{transform:rotateX(67deg) rotateZ(343deg)}}
+@keyframes st-dish-live{0%,100%{translate:0 0}50%{translate:0 -16px}}
+@keyframes st-glow-live{0%,100%{opacity:.45;scale:.92}50%{opacity:.95;scale:1.06}}
+@keyframes st-label-live{0%,100%{translate:0 0;rotate:-1deg}50%{translate:0 -10px;rotate:1deg}}
+@keyframes st-ribbon-live{to{transform:translateX(-50%)}}
+@keyframes st-announcement-live{to{background-position:220% 50%}}
+.hero-orbit{animation:st-orbit-live 18s linear infinite!important}
+.hero-dish{animation:st-dish-live 5.5s ease-in-out infinite!important;will-change:translate}
+.hero-visual:before{animation:st-glow-live 5s ease-in-out infinite!important}
+.floating-label{animation:st-label-live 5s ease-in-out infinite!important}
+.float-b{animation-delay:-2.5s!important}
+.announcement{background-size:220% 100%;animation:st-announcement-live 8s linear infinite!important}
+.kinetic-track{animation:st-ribbon-live 27s linear infinite!important}
+.food-card{animation:cardIn .55s both}
+.reveal{opacity:1;transform:none;filter:none}
+@media(prefers-reduced-motion:reduce){.hero-orbit,.hero-dish,.hero-visual:before,.floating-label,.announcement,.kinetic-track,.food-card{animation:none!important}}
+</style>
 </head><body>
 <div class="announcement" data-i18n="announcement">A LITTLE SOMETHING SPECIAL <b>·</b> YOUR TABLE IS WAITING <b>·</b> MADE FRESH, ALWAYS</div>
 <header class="header container"><a class="brand" href="#home" aria-label="Saffron Table home"><span class="brand-mark">S</span><span class="brand-name">SAFFRON TABLE<small data-i18n="brandTag">KITCHEN · GATHER · ENJOY</small></span></a><nav class="nav" id="mainNav" aria-label="Main navigation"><a href="#menu" data-i18n="navMenu">Our menu</a><a href="#experience" data-i18n="navExperience">Experience</a><a href="#story" data-i18n="navStory">Our story</a><a href="#visit" data-i18n="navVisit">Find us</a><a href="#reserve" data-i18n="navReserve">Reservations</a><a href="/portal.html" data-i18n="navAccount">My account</a></nav><div class="actions"><button class="lang" id="languageBtn" aria-label="Switch website language">عربي</button><button class="cart-button" id="openCart" aria-label="Open shopping cart"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/></svg><span class="cart-word" data-i18n="cart">Order</span><span class="cart-count" id="cartCount">0</span></button><button class="menu-toggle" id="mobileMenu" aria-label="Open navigation" aria-expanded="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button></div></header>
