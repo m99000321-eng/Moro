@@ -486,8 +486,10 @@ footer a:hover,.footer a:hover{color:#d5ff65}
 .announcement{background-size:220% 100%;animation:st-announcement-live 8s linear infinite!important}
 .kinetic-track{animation:st-ribbon-live 27s linear infinite!important}
 .food-card{animation:cardIn .55s both}
-.reveal{opacity:1;transform:none;filter:none}
-@media(prefers-reduced-motion:reduce){.hero-orbit,.hero-dish,.hero-visual:before,.floating-label,.announcement,.kinetic-track,.food-card{animation:none!important}}
+/* Preserve scroll-triggered reveal states; do not force all sections visible before the observer runs. */
+.reveal{opacity:0;transform:translateY(24px) scale(.99);filter:blur(3px);transition:opacity .75s ease,transform .75s cubic-bezier(.18,.8,.2,1),filter .75s ease}
+.reveal.visible{opacity:1;transform:none;filter:none}
+@media(prefers-reduced-motion:reduce){.hero-orbit,.hero-dish,.hero-visual:before,.floating-label,.announcement,.kinetic-track,.food-card{animation:none!important}.reveal{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}}
 </style>
 </head><body>
 <div class="announcement" data-i18n="announcement">A LITTLE SOMETHING SPECIAL <b>·</b> YOUR TABLE IS WAITING <b>·</b> MADE FRESH, ALWAYS</div>
@@ -862,11 +864,22 @@ if(params.get("resume")==="checkout"){
      if(toggle)toggle.setAttribute('aria-expanded','false');
    }
  });
- // Reveal sections even if IntersectionObserver is unavailable or initialization ran late.
- const reveal=()=>document.querySelectorAll('.reveal:not(.visible)').forEach(el=>{
-   const r=el.getBoundingClientRect();
-   if(r.top<window.innerHeight*.96&&r.bottom>0)el.classList.add('visible');
- });
+ // Reveal sections on entry; observe newly inserted content too.
+ const reveal=()=>{
+   document.querySelectorAll('.reveal:not(.visible)').forEach(el=>{
+     const r=el.getBoundingClientRect();
+     if(r.top<window.innerHeight*.96&&r.bottom>0)el.classList.add('visible');
+   });
+ };
+ let revealObserver=null;
+ if('IntersectionObserver' in window){
+   revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+     if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target);}
+   }),{threshold:.03,rootMargin:'0px 0px 100px 0px'});
+   document.querySelectorAll('.reveal:not(.visible)').forEach(el=>revealObserver.observe(el));
+ }else{
+   document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
+ }
  if('IntersectionObserver' in window){
    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
      if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}
