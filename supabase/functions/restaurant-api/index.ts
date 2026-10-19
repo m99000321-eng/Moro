@@ -59,6 +59,26 @@ async function api(path: string, init: RequestInit = {}): Promise<unknown> {
   }
   return data;
 }
+async function requireCustomer(req: Request): Promise<{userId:string}|{error:string;status:number}> {
+  const authorization = req.headers.get("authorization") ?? "";
+  const match = authorization.match(/^Bearer\s+(.+)$/i);
+  if (!match) return { error: "AUTH_REQUIRED", status: 401 };
+  const publishableKey = Deno.env.get("SUPABASE_ANON_KEY")
+    ?? Deno.env.get("SUPABASE_PUBLISHABLE_KEY")
+    ?? SERVICE_KEY;
+  const response = await fetch(SUPABASE_URL + "/auth/v1/user", {
+    headers: { "apikey": publishableKey, "Authorization": "Bearer " + match[1] }
+  });
+  if (!response.ok) return { error: "AUTH_REQUIRED", status: 401 };
+  const user = await response.json();
+  if (!user || typeof user.id !== "string") return { error: "AUTH_REQUIRED", status: 401 };
+  const profile = await api("restaurant_customers?user_id=eq." + encodeURIComponent(user.id) + "&select=user_id,status");
+  if (!Array.isArray(profile) || !profile.length) return { error: "CUSTOMER_PROFILE_MISSING", status: 403 };
+  if (profile[0].status !== "active") return { error: "CUSTOMER_SUSPENDED", status: 403 };
+  const staff = await api("restaurant_staff?user_id=eq." + encodeURIComponent(user.id) + "&select=user_id");
+  if (Array.isArray(staff) && staff.length) return { error: "ADMIN_ACCOUNT_NOT_CUSTOMER", status: 403 };
+  return { userId: user.id };
+}
 async function rateAllowed(req: Request, action: string, limit: number, windowSeconds: number): Promise<boolean> {
   const ip = req.headers.get("cf-connecting-ip")
     ?? req.headers.get("x-real-ip")
@@ -105,6 +125,8 @@ Deno.serve(async (req: Request) => {
     }
 
     if (action === "create_order") {
+      const customerAccess = await requireCustomer(req);
+      if ("error" in customerAccess) return respond(customerAccess.status, { ok: false, error: customerAccess.error }, origin);
       const name = text(body.name, 80);
       const phone = text(body.phone, 25);
       const fulfillmentType = text(body.fulfillmentType, 20);
@@ -135,13 +157,15 @@ Deno.serve(async (req: Request) => {
         body: JSON.stringify({
           p_customer_name: name, p_phone: phone, p_fulfillment_type: fulfillmentType,
           p_delivery_address: address, p_notes: notes, p_language: language,
-          p_items: items, p_payment_method: expectedPayment
+          p_items: items, p_payment_method: expectedPayment, p_customer_id: customerAccess.userId
         })
       });
       return respond(201, { ok: true, order: result }, origin);
     }
 
     if (action === "create_reservation") {
+      const customerAccess = await requireCustomer(req);
+      if ("error" in customerAccess) return respond(customerAccess.status, { ok: false, error: customerAccess.error }, origin);
       const name = text(body.name, 80);
       const phone = text(body.phone, 25);
       const date = text(body.date, 10);
@@ -159,7 +183,7 @@ Deno.serve(async (req: Request) => {
         body: JSON.stringify({
           p_customer_name: name, p_phone: phone, p_reservation_date: date,
           p_reservation_time: time, p_guest_count: guests, p_occasion: occasion,
-          p_notes: notes, p_language: language
+          p_notes: notes, p_language: language, p_customer_id: customerAccess.userId
         })
       });
       return respond(201, { ok: true, reservation: result }, origin);
